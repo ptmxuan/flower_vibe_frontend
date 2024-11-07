@@ -1,0 +1,250 @@
+.order-page {
+  .order-left {
+    margin-left: 100px;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    .info-order {
+      width: 40vw;
+      border: 2px solid #b7bf44;
+      border-radius: 30px;
+      .title-info-order {
+        font-family: "Signika", sans-serif;
+        color: #b7bf44;
+      }
+      .input-info-order {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        justify-content: center;
+        .ant-form.ant-form-horizontal.ant-form-default {
+          // width: 700vw;
+          .ant-form-item {
+            .ant-row {
+              .ant-col {
+                .ant-form-item-control-input {
+                  .ant-form-item-control-input-content {
+                    .ant-btn {
+                      background-color: #b7bf44;
+                      color: white;
+                      &:hover {
+                        color: #b7bf44;
+                        border-color: #b7bf44;
+                        background-color: white;
+                      }
+                    }
+
+                    .ant-picker {
+                      .ant-picker-input {
+                        width: 377px;
+                      }
+                    }
+                    .ant-picker:hover {
+                      border-color: #b7bf44;
+                    }
+                    .ant-select {
+                      display: flex;
+                      gap: 50px;
+                      width: 400px;
+                      .ant-select-selector {
+                        .ant-select-selection-placeholder {
+                          display: flex;
+                          justify-content: flex-start;
+                        }
+                      }
+                    }
+                    .ant-select:hover {
+                      border-color: #b7bf44;
+                    }
+                  }
+
+                  .ant-input.ant-input-outlined {
+                    &:hover {
+                      border-color: #b7bf44;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          .ant-form-item.ant-form-item-has-success {
+            .ant-row {
+              .ant-col {
+                .ant-form-item-control-input {
+                  .ant-form-item-control-input-content {
+                    .ant-btn {
+                      background-color: #b7bf44;
+                      color: white;
+                      &:hover {
+                        color: #b7bf44;
+                        border-color: #b7bf44;
+                        background-color: white;
+                      }
+                    }
+
+                    .ant-picker {
+                      .ant-picker-input {
+                        width: 377px;
+                      }
+                    }
+                    .ant-picker:hover {
+                      border-color: #b7bf44;
+                    }
+                    .ant-select {
+                      display: flex;
+                      gap: 50px;
+                      width: 400px;
+                      .ant-select-selector {
+                        .ant-select-selection-placeholder {
+                          display: flex;
+                          justify-content: flex-start;
+                        }
+                      }
+                    }
+                    .ant-select:hover {
+                      border-color: #b7bf44;
+                    }
+                  }
+
+                  .ant-input-outlined {
+                    &:hover {
+                      border-color: #b7bf44;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.order-right {
+  margin-right: 100px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+
+  .bill-of-order {
+    width: 40vw;
+    border: 2px solid #b7bf44;
+    border-radius: 30px;
+    padding: 10px 20px;
+    .title-bill {
+      font-family: "Signika", sans-serif;
+      color: #b7bf44;
+    }
+    .bill-content {
+      font-size: 11px;
+      .ten-nguoi-nhan {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 15px;
+      }
+      .so-dien-thoai {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 10px;
+      }
+      .dia-chi {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 10px;
+      }
+      .thoi-gian {
+        grid-template-columns: repeat(2, 1fr);
+        display: grid;
+        align-items: center;
+
+        .ngay-nhan-hang {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          gap: 10px;
+        }
+        .thoi-gian-nhan-hang {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          gap: 10px;
+        }
+      }
+      .ten-sp-mua {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 10px;
+      }
+      .gia-sp {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 10px;
+      }
+      .so-luong {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 10px;
+      }
+      .tong-gia {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 10px;
+      }
+      .thanh-toan {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 50px;
+        .payment-method {
+          display: flex;
+          flex-direction: row;
+          gap: 10px;
+        }
+      }
+      .xac-nhan {
+        .ant-form-item {
+          .ant-row {    display: flex;
+            justify-content: center;
+            align-items: center;
+            .ant-col {
+              .ant-form-item-control-input {
+                .ant-form-item-control-input-content {
+                  .ant-btn {
+                    margin-top: 20px;
+                    background-color: #b7bf44;
+                    color: white;
+                    
+                  }
+                 
+                  .ant-btn.fromLinkFiber215 {
+                    color: #b7bf44;
+                    border-color: #b7bf44;
+                    background-color: white;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// .footer {
+//   position: fixed;
+//   left: 0;
+//   bottom: 0;
+//   width: 100%;
+//   padding: 10px;
+//   text-align: center;
+// }

@@ -1,0 +1,12 @@
+.search-input {
+  display: flex;
+  justify-content: center;
+  height: 150px;
+  align-items: center;
+  .search-bar {
+    width: 50vw;
+    .ant-input-group-wrapper.ant-input-group-wrapper-lg.ant-input-group-wrapper-outlined:hover {
+      color: rgb(248, 248, 174);
+    }
+  }
+}

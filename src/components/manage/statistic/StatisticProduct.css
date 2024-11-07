@@ -1,0 +1,23 @@
+.wrapper-statistic .block-item{
+    display: grid;
+    grid-template-columns: 380px 115px 115px 130px 190px 100px;
+    gap: 50px;
+    border: 1px dashed #8E8E8E;
+    padding-left: 15px;
+}
+.exp,
+.exp-status{
+    display: flex;
+    align-items: center;
+}
+.wrapper-statistic{
+    display: flex;
+    flex-direction: column;
+    margin: 25px 25px 10px 15px;
+    font-size: 22px;
+    position: relative;
+    left: 10.2%;
+}
+.wrapper-statistic .btn-reset{
+    padding-right: 40px;
+}

@@ -1,0 +1,127 @@
+.AddProduct{
+
+  position: absolute;
+  left: 15%;
+  width: 87%;
+  /* justify-content: center; */
+  
+}
+.add-form {
+  margin-left: 100px;
+}
+.AddProduct label {
+  color: var(--Text, #000);
+
+  font-family: Roboto;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  text-transform: uppercase;
+  margin-top: 40px;
+}
+.AddProduct input{
+  height: 30px;
+  width: 90%;
+}
+.add-label h2 {
+  color: var(--Text, #000);
+  font-family: Roboto;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.AddProduct .title-add {
+  color: var(--Text, #000);
+
+  text-align: center;
+  font-family: Roboto;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+#summary.input-form,
+#description.input-form,
+#detail-product.input-form,
+#input-text.input-form {
+  height: 100px;
+}
+#upload-input{
+  display: none;
+}
+#input-text.input-form {
+  border-style: dashed;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 20px;
+}
+.AddProduct .image-button {
+  position: absolute;
+
+  transform: translate(420%, -20%);
+  z-index: 2;
+  width: 102px;
+  height: 40px;
+  color: #1e5eff;
+  text-align: center;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  background-color: white;
+  border: 1px solid #d7dbec;
+}
+.AddProduct .image-button:hover {
+  box-shadow: 0 0 4px #babdca;
+  cursor: pointer;
+}
+
+.upload-input {
+  position: absolute;
+  left: 50%;
+}
+.AddProduct .control-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-right: 70px;
+}
+.control-btn .cancel-btn,
+.add-btn {
+  color: var(--Text, #000);
+  text-transform: uppercase;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  width: 375px;
+  height: 60px;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 25px;
+  box-shadow: -6px -6px 10px #f9f9f9, 6px 6px 10px #00000026;
+}
+.AddProduct .cancel-btn:hover{
+  box-shadow: -2px -2px 2px #f9f9f9, 2px 2px 2px #00000026;
+  cursor: pointer;
+    
+}
+.add-btn:hover{
+  box-shadow: -2px -2px 2px #f9f9f9, 2px 2px 2px #00000026;
+  cursor: pointer;
+    
+}
+.uploaded-image{
+  width: 40%;
+  margin-top: 20px;
+ 
+}
+.uploaded-image img{
+  width: 100%;
+  position: relative;
+  left: 60%;
+}

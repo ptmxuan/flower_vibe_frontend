@@ -1,0 +1,100 @@
+.login-page {
+  background-image: url("../assets/img/background-login.png");
+  background-size: cover; /* Đảm bảo ảnh bao phủ toàn bộ phần tử */
+  background-position: center;
+  background-repeat: no-repeat; /* Ngăn ảnh nền lặp lại */
+  background-attachment: fixed;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .login {
+    width: 85vw;
+    height: 65vh;
+    .ant-row {
+      .ant-col {
+        display: flex;
+        justify-content: center;
+        .login-left {
+          font-size: 22px;
+          font-family: "Signika", sans-serif;
+          // margin-right: 40px;
+          margin-top: 110px;
+          color: #f9f8ee;
+          text-align: left;
+         
+          .title-login-left {
+            width: 30vw;
+            font-size: 20px;
+          }
+        }
+        .login-form {
+          background-color: rgb(176 191 148 / 48%);
+          width: 30vw;
+          height: fit-content;
+          border-radius: 30px;
+          a {
+            color: #186321;
+            font-weight: 600;
+          }
+
+          .title-login-right {
+            padding-top: 10px;
+            font-family: "Signika", sans-serif;
+            font-size: 24px;
+            color: #178223;
+          }
+          .form-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .ant-form-item-required {
+              font-family: "Signika", sans-serif;
+              font-size: 17px;
+            }
+            .ant-form-item-explain-error {
+              font-size: 16px;
+              color: #c11416;
+            }
+            .ant-form-item-control-input {
+              .ant-checkbox-wrapper.ant-checkbox-wrapper-checked.ant-checkbox-wrapper-in-form-item {
+                .ant-checkbox.ant-wave-target {
+                  .ant-checkbox-inner {
+                    background-color: #178223;
+                    border-color: #178223;
+                  }
+                }
+              }
+            }
+            .ant-form-item-control-input {
+              .ant-form-item-control-input-content {
+                .ant-input-affix-wrapper {
+                  width: 20vw;
+                }
+                .ant-btn {
+                  background: #178223;
+                  border-color: #178223;
+                  margin-right: 15px;
+                  margin-bottom: 20px;
+
+                  &:hover {
+                    background-color: white;
+                    color: #178223;
+                    border: 1px solid #178223;
+                    font-weight: 600;
+                  }
+                }
+                & > a {
+                  font-weight: 650;
+                  font-size: 17px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

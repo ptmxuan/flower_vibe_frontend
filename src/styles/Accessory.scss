@@ -1,0 +1,50 @@
+.accessory-page {
+  .accessory {
+    background-color: #f8f8f3;
+    .accessory-title {
+      color: rgb(167, 167, 8);
+      padding-top: 5px;
+      font-family: "Signika", sans-serif;
+    }
+    .accessory-list {
+      padding: 0 40px 25px 40px;
+      .ant-row {
+        .ant-col {
+          .accessory-item:hover {
+            transform: translateY(-5px);
+          }
+          .accessory-item {
+            max-height: 450px;
+            height: fit-content;
+            border: 1px solid #b7bf44;
+            box-sizing: border-box;
+            border-radius: 8px;
+            padding: 10px;
+
+            .hinh-pk {
+              width: 200px;
+              height: 250px;
+              // object-fit: cover;
+              border-radius: 5px;
+              margin-top: 15px;
+            }
+            .ten-pk {
+              font-size: 20px;
+              font-family: "Signika", sans-serif;
+              color: #b7bf44;
+              margin-top: 15px;
+            }
+            .gia-sp {
+              font-size: 15px;
+              font-family: "Signika", sans-serif;
+              margin: 15px 0;
+            }
+            .xemchitiet {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+}

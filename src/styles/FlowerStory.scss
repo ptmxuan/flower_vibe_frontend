@@ -1,0 +1,68 @@
+.flower-story {
+  .ant-list.ant-list-vertical.ant-list-lg.ant-list-split {
+    .ant-spin-nested-loading {
+      .ant-spin-container {
+        border: 2px solid rgb(152 151 39 / 88%);
+
+        margin: 0 20px;
+
+        border-radius: 30px;
+        .ant-list-items {
+          .ant-list-item {
+            border-block-end: 1px solid #b7bf44;
+            .ant-list-item-main {
+              text-align: left;
+              .ant-list-item-meta {
+                .ant-list-item-meta-content {
+                  .ant-list-item-meta-title {
+                    font-size: 30px;
+                    font-family: "Signika", sans-serif;
+                    & a:hover {
+                      color: #b7bf44;
+                    }
+                  }
+
+                  .ant-list-item-meta-description {
+                    text-align: left;
+                  }
+                }
+                .ant-list-item-extra {
+                  box-sizing: border-box;
+                  padding: 10px;
+                }
+              }
+            }
+            .ant-list-item-extra {
+              display: flex;
+              align-items: center;
+            }
+          }
+        }
+      }
+    }
+    .ant-list-pagination {
+      .ant-pagination.ant-pagination-end {
+        justify-content: center;
+        margin-bottom: 30px;
+        .ant-pagination-item.ant-pagination-item-1.ant-pagination-item-active {
+          border-color: #b7bf44;
+          & a {
+            color: #b7bf44;
+          }
+        }
+        .ant-pagination-item.ant-pagination-item-2.ant-pagination-item-active {
+          border-color: #b7bf44;
+          & a {
+            color: #b7bf44;
+          }
+        }
+        .ant-pagination-item.ant-pagination-item-3.ant-pagination-item-active {
+          border-color: #b7bf44;
+          & a {
+            color: #b7bf44;
+          }
+        }
+      }
+    }
+  }
+}

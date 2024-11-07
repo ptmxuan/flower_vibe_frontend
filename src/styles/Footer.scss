@@ -1,0 +1,22 @@
+.footer {
+  display: flex;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  gap: 50px;
+  background-color: rgb(248, 248, 174);
+  font-family: "Signika", sans-serif;
+  box-sizing: border-box;
+  padding: 8px;
+  font-size:15px;
+  .introduce {
+    .intro-page {
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+      a {
+        color: black;
+        text-decoration: none;
+      }
+    }
+  }
+}

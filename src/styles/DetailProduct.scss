@@ -1,0 +1,116 @@
+.detail-product {
+  margin: 20px 100px;
+  .in4-product {
+    box-shadow: 0 0 4px rgb(152 151 39 / 88%);
+    box-sizing: border-box;
+    padding: 20px;
+    .ant-row {
+      .ant-col.ant-col-9 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .product-img {
+          width: 350px;
+          height: 450px;
+        }
+      }
+      .ant-col.ant-col-15 {
+        font-family: "Signika", sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 20px;
+        h1 {
+          color: rgb(152 151 39 / 88%);
+          font-size: 35px;
+        }
+      }
+      .gia {
+        h2 {
+          margin-top: 0;
+        }
+      }
+      .danh-gia {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        align-items: center;
+      }
+      .in4 {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 14px;
+        p {
+          height: 0vh;
+        }
+      }
+
+      .so-luong-them-vao-gio-hang {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 11px;
+        .cart-quantity {
+          .ant-space {
+            .ant-space-item {
+              .ant-input-number:hover {
+                border-color: rgb(152 151 39 / 88%);
+              }
+              .ant-btn {
+                background-color: rgb(152 151 39 / 88%);
+              }
+            }
+          }
+        }
+        .ant-btn.ant-btn-default {
+          color: rgb(152 151 39 / 88%);
+          width: 12vw;
+          font-size:13px;
+        }
+        .ant-btn.ant-btn-default:hover {
+          border-color: rgb(152 151 39 / 88%);
+        }
+      }
+      .mua-hang {
+        margin-top: 10px;
+        .ant-btn {
+          background-color: rgb(152 151 39 / 88%);
+          color: white;
+          width: 19vw;
+        }
+
+        .ant-btn:hover {
+          background-color: white;
+          border-color: rgb(152 151 39 / 88%);
+          color: rgb(152 151 39 / 88%);
+        }
+      }
+      .mo-ta-sp {
+        // font-family: "Signika", sans-serif;
+        text-align: left;
+        margin-top: 10px;
+        h3 {
+          display: inline;
+        }
+        span {
+          display: inline;
+        }
+      }
+      .note {
+        font-size: 13px;
+        font-style: italic;
+        text-align: left;
+      }
+    }
+  }
+}
+// .footer {
+//   position: fixed;
+//   left: 0;
+//   bottom: 0;
+//   width: 100%;
+//   padding: 10px;
+//   text-align: center;
+// }

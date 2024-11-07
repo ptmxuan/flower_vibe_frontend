@@ -1,0 +1,157 @@
+const userData = [
+  {
+    id: 1,
+    name: "Nguyễn Văn A",
+    email: "nguyenvana@example.com",
+    phone: "0123456789",
+    address: "123 Đường Hoa, Quận 1, TP.HCM",
+    dateOfBirth: "1990-01-01",
+    favoriteFlowers: [
+      { id: 1, name: "Hoa Hồng" },
+      { id: 2, name: "Hoa Ly" },
+    ],
+    orders: [
+      {
+        orderId: 101,
+        date: "2023-10-01",
+        status: "Đã giao",
+        items: [{ flower: "Hoa Hồng", quantity: 10 }],
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: "Trần Thị B",
+    email: "tranthib@example.com",
+    phone: "0987654321",
+    address: "456 Đường Mai, Quận 2, TP.HCM",
+    dateOfBirth: "1985-05-15",
+    favoriteFlowers: [
+      { id: 3, name: "Hoa Cẩm Chướng" },
+      { id: 4, name: "Hoa Cúc" },
+    ],
+    orders: [],
+  },
+  {
+    id: 3,
+    name: "Lê Văn C",
+    email: "levanc@example.com",
+    phone: "0123456780",
+    address: "789 Đường Nhài, Quận 3, TP.HCM",
+    dateOfBirth: "1992-03-22",
+    favoriteFlowers: [{ id: 5, name: "Hoa Đào" }],
+    orders: [
+      {
+        orderId: 102,
+        date: "2023-09-10",
+        status: "Đang xử lý",
+        items: [{ flower: "Hoa Ly", quantity: 5 }],
+      },
+    ],
+  },
+  {
+    id: 4,
+    name: "Phạm Minh D",
+    email: "phaminhd@example.com",
+    phone: "0123456781",
+    address: "321 Đường Xuân, Quận 4, TP.HCM",
+    dateOfBirth: "1995-12-30",
+    favoriteFlowers: [{ id: 6, name: "Hoa Nhài" }],
+    orders: [],
+  },
+  {
+    id: 5,
+    name: "Ngô Thị E",
+    email: "ngothie@example.com",
+    phone: "0123456782",
+    address: "654 Đường Hương, Quận 5, TP.HCM",
+    dateOfBirth: "1988-07-19",
+    favoriteFlowers: [
+      { id: 7, name: "Hoa Sen" },
+      { id: 1, name: "Hoa Hồng" },
+    ],
+    orders: [
+      {
+        orderId: 103,
+        date: "2023-08-05",
+        status: "Đã giao",
+        items: [{ flower: "Hoa Cúc", quantity: 20 }],
+      },
+    ],
+  },
+  {
+    id: 6,
+    name: "Đỗ Văn F",
+    email: "dovanf@example.com",
+    phone: "0123456783",
+    address: "987 Đường Lê, Quận 6, TP.HCM",
+    dateOfBirth: "1991-11-11",
+    favoriteFlowers: [
+      { id: 2, name: "Hoa Ly" },
+      { id: 3, name: "Hoa Cẩm Chướng" },
+    ],
+    orders: [],
+  },
+  {
+    id: 7,
+    name: "Nguyễn Thị G",
+    email: "nguyenthig@example.com",
+    phone: "0123456784",
+    address: "147 Đường Ngọc, Quận 7, TP.HCM",
+    dateOfBirth: "1993-09-09",
+    favoriteFlowers: [{ id: 4, name: "Hoa Cúc" }],
+    orders: [
+      {
+        orderId: 104,
+        date: "2023-10-02",
+        status: "Đang xử lý",
+        items: [{ flower: "Hoa Hồng", quantity: 15 }],
+      },
+    ],
+  },
+  {
+    id: 8,
+    name: "Bùi Văn H",
+    email: "buivanh@example.com",
+    phone: "0123456785",
+    address: "258 Đường Quê, Quận 8, TP.HCM",
+    dateOfBirth: "1987-06-16",
+    favoriteFlowers: [{ id: 5, name: "Hoa Đào" }],
+    orders: [],
+  },
+  {
+    id: 9,
+    name: "Vũ Thị I",
+    email: "vuthi@example.com",
+    phone: "0123456786",
+    address: "369 Đường Lộc, Quận 9, TP.HCM",
+    dateOfBirth: "1994-02-14",
+    favoriteFlowers: [
+      { id: 1, name: "Hoa Hồng" },
+      { id: 6, name: "Hoa Nhài" },
+    ],
+    orders: [
+      {
+        orderId: 105,
+        date: "2023-07-20",
+        status: "Đã giao",
+        items: [{ flower: "Hoa Ly", quantity: 12 }],
+      },
+    ],
+  },
+  {
+    id: 10,
+    name: "Lê Văn K",
+    email: "levank@example.com",
+    phone: "0123456787",
+    address: "741 Đường Phúc, Quận 10, TP.HCM",
+    dateOfBirth: "1989-08-08",
+    favoriteFlowers: [
+      { id: 3, name: "Hoa Cẩm Chướng" },
+      { id: 7, name: "Hoa Sen" },
+    ],
+    orders: [],
+  },
+];
+
+export default userData;

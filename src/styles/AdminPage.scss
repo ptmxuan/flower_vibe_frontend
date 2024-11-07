@@ -1,0 +1,17 @@
+.Admin {
+  height: 100%;
+  width: 100%;
+
+  .content-right {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .sidebar-left {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9;
+  }
+}

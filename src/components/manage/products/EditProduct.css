@@ -1,0 +1,110 @@
+.edit-form {
+    margin-left: 100px;
+  }
+  .EditProduct label {
+    color: var(--Text, #000);
+  
+    font-family: Roboto;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    text-transform: uppercase;
+    margin-top: 40px;
+  }
+  .EditProduct input{
+    height: 30px;
+    width: 90%;
+  }
+  .edit-label h2 {
+    color: var(--Text, #000);
+    font-family: Roboto;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  .EditProduct .title {
+    color: var(--Text, #000);
+  
+    text-align: center;
+    font-family: Roboto;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+  }
+  #summary.input-form,
+  #description.input-form,
+  #detail-product.input-form,
+  #image.input-form {
+    height: 100px;
+  }
+
+  #upload-input.input-form.EditProduct {
+    border-style: dashed;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 20px;
+  }
+  .EditProduct .image-button {
+    position: absolute;
+  
+    transform: translate(460%, -20%);
+    z-index: 2;
+    width: 102px;
+    height: 40px;
+    color: #1e5eff;
+    text-align: center;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    background-color: white;
+    border: 1px solid #d7dbec;
+  }
+  .EditProduct .image-button:hover {
+    box-shadow: 0 0 4px #babdca;
+  }
+  
+  .upload-input {
+    position: absolute;
+    left: 50%;
+  }
+  .control-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .cancel-btn,
+  .delete-btn,
+  .save-btn {
+    color: var(--Text, #000);
+    text-transform: uppercase;
+    text-align: center;
+    font-family: Roboto;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 375px;
+    height: 60px;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    box-shadow: -6px -6px 10px #f9f9f9, 6px 6px 10px #00000026;
+  }
+  .cancel-btn:hover{
+      box-shadow: 0 0 5px rgb(205, 191, 191);
+      background-color: white;
+  }
+  .delete-btn:hover{
+      box-shadow: 0 0 5px rgb(205, 191, 191);
+      background-color: white;
+  }
+  .save-btn:hover{
+    box-shadow: 0 0 5px rgb(205, 191, 191);
+      background-color: white;
+  }
+ 
+  

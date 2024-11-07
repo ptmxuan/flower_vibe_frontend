@@ -1,0 +1,22 @@
+.MainDash {
+    /* padding-top: 1rem; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    /* background-color: rgb(97, 238, 238); */
+    height: 666px;
+    margin-right: 20px;
+    width: 80%;
+    position: relative;
+    left: 17.2%;
+  
+    @media screen and (max-width: 1200px) {
+      justify-content: flex-start;
+      margin-top: 2rem;
+    }
+  
+    @media screen and (max-width: 768px) {
+      align-items: center;
+    }
+  }
+  
