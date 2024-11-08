@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { Button, Form, Input, Select, message } from "antd";
-import { useRegister } from "@/hooks"; // Thay đường dẫn phù hợp
+import { useRegister } from "@/hooks";
+import { useNavigate } from "react-router-dom";
 
 const { Option } = Select;
 
 function RegisterForm() {
   const [form] = Form.useForm();
   const { register, loading, error, success } = useRegister();
-
+  const navigate = useNavigate();
   const onFinish = async (values) => {
     const userData = {
       name: values.name,
@@ -18,10 +19,10 @@ function RegisterForm() {
     };
     await register(userData);
     if (success) {
-      console.log("success", success);
       message.success("Đăng ký thành công!");
       form.resetFields();
     }
+    navigate("/dang-nhap");
   };
 
   // Hiển thị thông báo khi đăng ký thành công hoặc thất bại

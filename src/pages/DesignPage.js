@@ -1,8 +1,11 @@
-import Design from "@/components/design/Design";
+import Design2 from "@/components/design-v2/Design";
+
+// import Design from "@/components/design/Design";
 function DesignPage() {
   return (
     <div className="design-page">
-      <Design />
+      {/* <Design /> */}
+      <Design2 />
     </div>
   );
 }

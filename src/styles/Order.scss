@@ -87,10 +87,11 @@
                       .ant-picker-input {
                         width: 377px;
                       }
+                      &:hover {
+                        border-color: #b7bf44;
+                      }
                     }
-                    .ant-picker:hover {
-                      border-color: #b7bf44;
-                    }
+
                     .ant-select {
                       display: flex;
                       gap: 50px;
@@ -100,6 +101,9 @@
                           display: flex;
                           justify-content: flex-start;
                         }
+                      }
+                      &:hover {
+                        border-color: #b7bf44;
                       }
                     }
                     .ant-select:hover {
@@ -138,7 +142,7 @@
       color: #b7bf44;
     }
     .bill-content {
-      font-size: 11px;
+      font-size: 13px;
       .ten-nguoi-nhan {
         display: flex;
         justify-content: flex-start;
@@ -199,20 +203,11 @@
         align-items: center;
         gap: 10px;
       }
-      .thanh-toan {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        gap: 50px;
-        .payment-method {
-          display: flex;
-          flex-direction: row;
-          gap: 10px;
-        }
-      }
+
       .xac-nhan {
         .ant-form-item {
-          .ant-row {    display: flex;
+          .ant-row {
+            display: flex;
             justify-content: center;
             align-items: center;
             .ant-col {
@@ -222,9 +217,13 @@
                     margin-top: 20px;
                     background-color: #b7bf44;
                     color: white;
-                    
+                    &:hover {
+                      color: #b7bf44;
+                    border-color: #b7bf44;
+                    background-color: white;
+                    }
                   }
-                 
+
                   .ant-btn.fromLinkFiber215 {
                     color: #b7bf44;
                     border-color: #b7bf44;

@@ -1,0 +1,37 @@
+.payment-success-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f2f5;
+
+  .ant-result-icon {
+    color: #b7bf44;
+  }
+  .ant-result-title {
+    font-size: 30px;
+  }
+  .ant-result-subtitle {
+    font-size: 20px;
+  }
+  .ant-result-extra {
+    .ant-btn-primary {
+      background-color: #b7bf44;
+      border-color: #b7bf44;
+      &:hover {
+        color: #b7bf44;
+        border-color: #b7bf44;
+        background-color: white;
+      }
+    }
+    .ant-btn-default {
+      color: #b7bf44;
+      border-color: #b7bf44;
+      &:hover {
+        color: white;
+        background-color: #b7bf44;
+        border-color: #b7bf44;
+      }
+    }
+  }
+}

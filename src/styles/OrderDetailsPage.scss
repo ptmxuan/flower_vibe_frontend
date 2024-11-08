@@ -1,0 +1,54 @@
+.order-details-page {
+  font-family: "Signika", sans-serif;
+  border-radius: 30px;
+  .order-details-title {
+    font-family: "Signika", sans-serif;
+    color: #b7bf44;
+  }
+  .order-details-content {
+    .order-summary {
+      display: flex;
+      justify-content: center;
+      gap: 100px;
+    }
+    .merge {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      margin-bottom:20px;
+      .left {
+        border: 2px solid #b7bf44;
+        width: 40vw;
+        display: flex;
+        flex-direction: column;
+       
+        border: 2px solid #b7bf44;
+        border-radius: 30px;
+        .recipient-info {
+          & > h3 {
+            color: #b7bf44;
+          }
+          & > p {
+          }
+        }
+        .delivery-info {
+        }
+      }
+      .right {
+        border: 2px solid #b7bf44;
+        width: 40vw;
+        display: flex;
+        flex-direction: column;
+      
+        border: 2px solid #b7bf44;
+        border-radius: 30px;
+        .cart-items {
+          .cart-item {
+          }
+        }
+        .order-total {
+        }
+      }
+    }
+  }
+}

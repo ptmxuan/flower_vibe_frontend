@@ -8,26 +8,32 @@ function UserIcon() {
     localStorage.removeItem("user");
     navigate("/dang-nhap");
   };
-  const items = [
-    {
-      label: <a href="/dang-nhap">Đăng nhập</a>,
-      key: "Đăng nhập",
-    },
-    {
-      label: <a href="/nguoi-dung">Thông tin tài khoản</a>,
-      key: "Thông tin tài khoản",
-    },
-    {
-      label: "Đăng xuất",
-      key: "Đăng xuất",
-      onClick: handleLogout,
-    },
-  ];
+  const user = JSON.parse(localStorage.getItem("user"));
+  const items = () => {
+    const afterLoginItems = [
+      {
+        label: <a href="/nguoi-dung">Thông tin tài khoản</a>,
+        key: "Thông tin tài khoản",
+      },
+      {
+        label: "Đăng xuất",
+        key: "Đăng xuất",
+        onClick: handleLogout,
+      },
+    ];
+    const beforLoginItems = [
+      {
+        label: <a href="/dang-nhap">Đăng nhập</a>,
+        key: "Đăng nhập",
+      },
+    ];
+    return user ? afterLoginItems : beforLoginItems;
+  };
   return (
     <div className="user-icon">
       <Dropdown
         menu={{
-          items,
+          items: items(),
         }}
       >
         <a onClick={(e) => e.preventDefault()}>
