@@ -1,6 +1,6 @@
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 
-import { TomatoImg } from '../../media';
+import { ReactComponent as TomatoImg } from '../../../media/tomato_big.svg';
 
 import './Ingredient.sass';
 
