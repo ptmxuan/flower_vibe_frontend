@@ -1,22 +1,22 @@
-import { Spin } from "antd";
-import React, { Suspense, lazy } from "react";
-import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
+import AboutUsPage from "@/pages/AboutUsPage";
+import AccessoryPage from "@/pages/AccessoryPage";
+import AdminPage from "@/pages/AdminPage";
+import CartPage from "@/pages/CartPage";
+import DesignPage from "@/pages/DesignPage";
+import DetailAccessoryPage from "@/pages/DetailAccessoryPage";
+import DetailProductPage from "@/pages/DetailProductPage";
+import FlowerStoryPage from "@/pages/FlowerStoryPage";
 import HomePage from "@/pages/HomePage";
 import LoginPage from "@/pages/LoginPage";
-import FlowerStoryPage from "@/pages/FlowerStoryPage";
-import SearchPage from "@/pages/SearchPage";
-import PolicyPage from "@/pages/PolicyPage";
-import AboutUsPage from "@/pages/AboutUsPage";
-import CartPage from "@/pages/CartPage";
-import UserPage from "@/pages/UserPage";
-import RegisterPage from "@/pages/RegisterPage";
-import ProductPage from "@/pages/ProductPage";
-import DetailProductPage from "@/pages/DetailProductPage";
 import OrderPage from "@/pages/OrderPage";
-import DesignPage from "@/pages/DesignPage";
-import AccessoryPage from "@/pages/AccessoryPage";
-import DetailAccessoryPage from "@/pages/DetailAccessoryPage";
-import AdminPage from "@/pages/AdminPage";
+import PolicyPage from "@/pages/PolicyPage";
+import ProductPage from "@/pages/ProductPage";
+import RegisterPage from "@/pages/RegisterPage";
+import SearchPage from "@/pages/SearchPage";
+import UserPage from "@/pages/UserPage";
+import { Spin } from "antd";
+import { Suspense } from "react";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 function Layout() {
   return (
     <Suspense
