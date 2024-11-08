@@ -1,111 +1,26 @@
-import React, { createContext, useState } from 'react';
+import { createContext, useState } from 'react';
 import { ReactComponent as HoaHong } from './media/hoahong.svg';
 import { ReactComponent as HoaHongHong } from './media/hoahonghong.svg';
+import { ReactComponent as HoaMauDon } from './media/hoamaudon.svg';
 
 export const AppContext = createContext(null);
-
-const BasilImgA = React.lazy(() => import('./media/basil_a.svg'));
-const BasilImgB = React.lazy(() => import('./media/basil_b.svg'));
-const CamembertImg = React.lazy(() => import('./media/camembert.svg'));
-const CamembertHalfImg = React.lazy(() => import('./media/camembert_half.svg'));
-const ChilliRedImgA = React.lazy(() => import('./media/chilli_red_a.svg'));
-const ChilliRedImgB = React.lazy(() => import('./media/chilli_red_b.svg'));
-const ChilliYellowImgA = React.lazy(() => import('./media/chilli_yellow_a.svg'));
-const ChilliYellowImgB = React.lazy(() => import('./media/chilli_yellow_b.svg'));
-const ChilliGreenImgA = React.lazy(() => import('./media/chilli_green_a.svg'));
-const ChilliGreenImgB = React.lazy(() => import('./media/chilli_green_b.svg'));
-const CucumberPickledImgA = React.lazy(() => import('./media/cucumber_pickled_a.svg'));
-const CucumberPickledImgB = React.lazy(() => import('./media/cucumber_pickled_b.svg'));
-const FetaImgA = React.lazy(() => import('./media/feta_a.svg'));
-const FetaImgB = React.lazy(() => import('./media/feta_b.svg'));
-const HamImgA = React.lazy(() => import('./media/ham_a.svg'));
-const HamImgB = React.lazy(() => import('./media/ham_b.svg'));
-const MusselImgA = React.lazy(() => import('./media/mussel_a.svg'));
-const MusselImgB = React.lazy(() => import('./media/mussel_b.svg'));
-const MusselClosedImg = React.lazy(() => import('./media/mussel_closed.svg'));
-const MusselOpenImgA = React.lazy(() => import('./media/mussel_opened_a.svg'));
-const MusselOpenImgB = React.lazy(() => import('./media/mussel_opened_b.svg'));
-const OctopusImgA = React.lazy(() => import('./media/octopus_a.svg'));
-const OctopusImgB = React.lazy(() => import('./media/octopus_b.svg'));
-const OliveBlackImgA = React.lazy(() => import('./media/olive_black_sliced.svg'));
-const OliveBlackImgB = React.lazy(() => import('./media/olive_black_whole.svg'));
-const OliveGreenImgA = React.lazy(() => import('./media/olive_green_sliced.svg'));
-const OliveGreenImgB = React.lazy(() => import('./media/olive_green_whole.svg'));
-const OnionImg = React.lazy(() => import('./media/onion.svg'));
-const OreganoImg = React.lazy(() => import('./media/oregano.svg'));
-const PineappleImgA = React.lazy(() => import('./media/pineapple_a.svg'));
-const PineappleImgB = React.lazy(() => import('./media/pineapple_b.svg'));
-const PineappleImgC = React.lazy(() => import('./media/pineapple_c.svg'));
-const ProsciuttoImgA = React.lazy(() => import('./media/prosciutto_a.svg'));
-const ProsciuttoImgB = React.lazy(() => import('./media/prosciutto_b.svg'));
-const RoquefortBlueImg = React.lazy(() => import('./media/rokpol_blue.svg'));
-const RoquefortGoldImg = React.lazy(() => import('./media/rokpol_gold.svg'));
-const RucolaImgA = React.lazy(() => import('./media/rucola_a.svg'));
-const RucolaImgB = React.lazy(() => import('./media/rucola_b.svg'));
-const RucolaImgC = React.lazy(() => import('./media/rucola_c.svg'));
-const SalamiRedImg = React.lazy(() => import('./media/salami_red.svg'));
-const SalamiAgedImg = React.lazy(() => import('./media/salami_aged.svg'));
-const ShrimpImg = React.lazy(() => import('./media/shrimp.svg'));
-const ShrimpShellImg = React.lazy(() => import('./media/shrimp_shell.svg'));
-const ShroomLightImg = React.lazy(() => import('./media/shroom_light.svg'));
-const ShroomDarkImg = React.lazy(() => import('./media/shroom_dark.svg'));
-const TomatoBigImg = React.lazy(() => import('./media/tomato_big.svg'));
-const TomatoSmallImg = React.lazy(() => import('./media/tomato_small.svg'));
 
 const AppProvider = ({ children }) => {
   const [ingreds, setIngreds] = useState([]);
   const [currentIngred, setCurrentIngred] = useState(null);
   const [addButtonList, setAddButtonList] = useState({
-    cheese: ['camembert', 'camembert half', 'feta', 'roquefort blue', 'roquefort gold'],
-    'herbs/other': ['basil', 'oregano', 'rucola', 'pineapple', 'shroom dark', 'shroom light'],
-    meat: ['ham', 'prosciutto', 'salami', 'salami aged'],
-    seafood: ['mussel', 'mussel opened', 'mussel closed', 'octopus', 'shrimp peeled', 'shrimp'],
-    veggies: [
-      'cucumber',
-      'cucumber pickled',
-      'chilli green',
-      'chilli red',
-      'chilli yellow',
-      'olive black',
-      'olive green',
-      'onion',
-      'tomato',
-      'tomato cocktail',
+    'Hoa hồng': [
+      'Hoa hồng đỏ',
+      'Hoa mẫu đơn',
+      'Hoa hồng',
     ],
   });
 
   const [images, setImages] = useState({
-    basil: [BasilImgA, BasilImgB],
-    camembert: CamembertImg,
-    'camembert half': CamembertHalfImg,
-    'chilli green': [ChilliGreenImgA, ChilliGreenImgB],
-    'chilli red': [ChilliRedImgA, ChilliRedImgB],
-    'chilli yellow': [ChilliYellowImgA, ChilliYellowImgB],
-    feta: [FetaImgA, FetaImgB],
-    ham: [HamImgA, HamImgB],
-    mussel: [MusselImgA, MusselImgB],
-    'mussel opened': [MusselOpenImgA, MusselOpenImgB],
-    'mussel closed': MusselClosedImg,
-    octopus: [OctopusImgA, OctopusImgB],
-    'olive black': [OliveBlackImgA, OliveBlackImgB],
-    'olive green': [OliveGreenImgA, OliveGreenImgB],
-    onion: OnionImg,
-    oregano: OreganoImg,
-    pineapple: [PineappleImgA, PineappleImgB, PineappleImgC],
-    prosciutto: [ProsciuttoImgA, ProsciuttoImgB],
-    'roquefort blue': RoquefortBlueImg,
-    'roquefort gold': RoquefortGoldImg,
-    rucola: [RucolaImgA, RucolaImgB, RucolaImgC],
-    salami: SalamiRedImg,
-    'salami aged': SalamiAgedImg,
-    'shrimp peeled': ShrimpImg,
-    shrimp: ShrimpShellImg,
-    'shroom dark': ShroomDarkImg,
-    'shroom light': ShroomLightImg,
-    tomato: TomatoBigImg,
-    'tomato cocktail': TomatoSmallImg,
-    cucumber: HoaHong,
-    'cucumber pickled': [HoaHongHong, HoaHongHong],
+    'Hoa hồng đỏ': HoaHong,
+    'Hoa mẫu đơn': HoaMauDon,
+    'Hoa hồng': HoaHongHong,
+    // 'red rose': [HoaHong,HoaHong],   Nếu có nhiều hơn 1 thì sẽ lấy ngẫu nhiên, hiểu là cùng là hao đỏ nhưng hình dáng khác nhau tí
   });
 
   return (
@@ -127,3 +42,64 @@ const AppProvider = ({ children }) => {
 };
 
 export default AppProvider;
+
+
+// import { useDesign } from "@/hooks/useDesign";
+// import React, { createContext, Suspense, useState } from "react";
+
+// export const AppContext = createContext(null);
+
+// // Custom lazy function to handle dynamic imports
+// export const lazy = (componentImportFn) =>
+//   React.lazy(async () => {
+//     let obj = await componentImportFn();
+//     return typeof obj.default === "function" ? obj : { default: obj.default };
+//   });
+
+// const AppProvider = ({ children }) => {
+//   const { dataPanel, dataImages } = useDesign();
+
+//   const [ingreds, setIngreds] = useState([]);
+//   const [currentIngred, setCurrentIngred] = useState(null);
+
+//   // Initialize addButtonList state based on dataPanel and dataImages
+//   const [addButtonList, setAddButtonList] = useState(() =>
+//     dataPanel.reduce((acc, panel) => {
+//       acc[panel] = dataImages
+//         .filter((image) => image.panel === panel)
+//         .map((image) => image.title);
+//       return acc;
+//     }, {})
+//   );
+
+//   // Initialize images state with dynamic imports of SVGs using custom lazy
+//   const [images, setImages] = useState(() =>
+//     dataImages.reduce((acc, image) => {
+//       acc[image.title] = image.src.map((src) =>
+//         lazy(() => import(`${src}`).catch(() => ({ default: () => null })))
+//       );
+//       return acc;
+//     }, {})
+//   );
+
+//   return (
+//     <AppContext.Provider
+//       value={{
+//         ingreds,
+//         setIngreds,
+//         addButtonList,
+//         setAddButtonList,
+//         images,
+//         setImages,
+//         currentIngred,
+//         setCurrentIngred,
+//       }}
+//     >
+//       <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+//     </AppContext.Provider>
+//   );
+// };
+
+// export default AppProvider;
+
+// https://github.com/fuse-box/fuse-box/issues/1646

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import './AddPanel.sass';
 
@@ -8,7 +8,7 @@ import { Tab } from './Tab/Tab';
 
 export const AddPanel = () => {
   const { addButtonList } = useContext(AppContext);
-  const [activePanel, setActivePanel] = useState('veggies');
+  const [activePanel, setActivePanel] = useState('Hoa hồng');
 
   useEffect(() => {
     window.addEventListener('keydown', tabSwitcher);
@@ -28,8 +28,15 @@ export const AddPanel = () => {
     }
   };
 
-  const panels = ['cheese', 'herbs/other', 'meat', 'seafood', 'veggies'];
-  const addbuttons = addButtonList[activePanel].map((elem, idx) => <AddIngredient key={elem + idx} type={elem} />);
+  // const {dataPanel} = useDesign()
+  // const panels = dataPanel; sau này sẽ dùng cách này thay vì cố định
+  const panels = ['Hoa hồng'];
+
+
+  const addbuttons = addButtonList[activePanel].map((elem, idx) => {
+    return <AddIngredient key={elem + idx} type={elem} />;
+  });
+  
   const tabs = Object.keys(addButtonList).map((elem, idx) => (
     <Tab title={elem} key={elem + idx} active={activePanel} setActive={setActivePanel} />
   ));
