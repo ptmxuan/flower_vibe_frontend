@@ -20,7 +20,13 @@ function UserInfor() {
         </div>
         <div className="user-male">
           <p>Giới tính: </p>
-          <span>{user.gender}</span>
+          <span>
+            {user.gender === "female"
+              ? "Nữ"
+              : user.gender === "other"
+              ? "Khác"
+              : "Nam"}
+          </span>
         </div>
       </div>
     </div>

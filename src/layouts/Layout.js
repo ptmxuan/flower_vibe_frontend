@@ -17,6 +17,7 @@ import DesignPage from "@/pages/DesignPage";
 import AccessoryPage from "@/pages/AccessoryPage";
 import DetailAccessoryPage from "@/pages/DetailAccessoryPage";
 import AdminPage from "@/pages/AdminPage";
+import PaymentSuccessPage from "@/pages/PaymentSuccessPage";
 function Layout() {
   return (
     <Suspense
@@ -50,6 +51,7 @@ function Layout() {
           <Route path="/phu-kien" element={<AccessoryPage />} />
           <Route path="/phu-kien/:id" element={<DetailAccessoryPage />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/vnpay_return" element={<PaymentSuccessPage />} />
         </Routes>
       </Router>
     </Suspense>

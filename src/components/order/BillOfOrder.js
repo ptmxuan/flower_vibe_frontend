@@ -13,6 +13,46 @@ function BillOfOrder({
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
   };
+  const handleSubmitOnline = async () => {
+    // Gửi yêu cầu tới backend
+    fetch(
+      `${process.env.REACT_APP_SERVER_ENDPOINT}/api/payment/create_payment_url`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          amount: 500000,
+          bankCode: "NCB",
+          language: "vn",
+        }),
+      }
+    )
+      .then((res) => {
+        console.log("🚀 ~ .then ~ res:", res);
+        // Kiểm tra xem phản hồi có đúng không
+        if (!res.ok) {
+          throw new Error("Server error: " + res.status);
+        }
+        return res.json(); // Xử lý dữ liệu JSON
+      })
+      .then((data) => {
+        console.log("Response from backend:", data); // Kiểm tra dữ liệu trả về
+
+        // Kiểm tra xem có URL thanh toán không
+        if (data && data.vnpUrl) {
+          window.location.href = data.vnpUrl;
+        } else {
+          console.log("Không nhận được URL thanh toán.");
+        }
+      })
+
+      .catch((error) => {
+        console.error("Error occurred:", error);
+      });
+  };
   const totalBillPrice = cartItems.reduce((total, item) => {
     let priceAfterDiscount = item.gia;
     if (item.phantramgiamgia > 0) {
@@ -76,36 +116,10 @@ function BillOfOrder({
             </div>
           );
         })}
-        <div className="thanh-toan">
-          <h3>Chọn phương thức thanh toán: </h3>
-          <form className="payment-method">
-            <label>
-              <input
-                type="radio"
-                name="option"
-                value="option1"
-                checked={selectedOption === "option1"}
-                onChange={handleChange}
-              />
-              Thanh toán khi nhận hàng
-            </label>
-            <br />
-            <label>
-              <input
-                type="radio"
-                name="option"
-                value="option2"
-                checked={selectedOption === "option2"}
-                onChange={handleChange}
-              />
-              Thanh toán trực tuyến
-            </label>
-            <br />
-          </form>
-        </div>
+
         <div className="xac-nhan">
           <Form.Item>
-            <Button>Mua Hàng</Button>
+            <Button onClick={handleSubmitOnline}>Thanh Toán</Button>
           </Form.Item>
         </div>
       </div>

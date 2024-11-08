@@ -105,7 +105,7 @@
                   height: fit-content;
                   border-radius: 10px;
                   box-sizing: border-box;
-                  height: 55vh;
+                  height: 50vh;
                   // padding: 15px 0;
                   .hinh-sp {
                     width: 150px;
@@ -131,6 +131,9 @@
                   }
                   .xemchitiet {
                     text-decoration: underline;
+                  }
+                  &:hover{
+                    transform: translateY(-3%);
                   }
                 }
               }
@@ -179,7 +182,7 @@
                   box-sizing: border-box;
                   margin-bottom: 10px;
                   // padding: 15px 0;
-                  height: 55vh;
+                  height: 50vh;
                   .hinh-sp {
                     width: 150px;
                     height: 200px;
@@ -205,6 +208,9 @@
                   .xemchitiet {
                     text-decoration: underline;
                   }
+                  &:hover{
+                    transform: translateY(-3%);
+                  }
                 }
               }
             }
@@ -213,7 +219,6 @@
       }
     }
   }
-
 }
 .ant-dropdown {
   position: absolute;
