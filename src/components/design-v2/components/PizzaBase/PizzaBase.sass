@@ -1,0 +1,32 @@
+.pizza_building
+  position: absolute
+  top: 50%
+  left: 50%
+  flex-grow: 1
+  overflow: visible
+
+.pizza_back
+  z-index: 1
+
+.pizza_front
+  z-index: 5
+  clip-path: polygon(2.99% 25%, 8.92% 25.68%, 32.51% 50.54%, 29.89% 42.79%, 32.51% 40.03%, 37.33% 44.31%, 44.01% 40.03%, 53.5% 44.31%, 66.26% 40.03%, 70.06% 46.79%, 78.13% 33.56%, 90.46% 17.86%, 96.77% 25%, 95.13% 50.54%, 100% 100%, 0% 99.39%)
+
+.pizza_white_page
+  top: 75% !important
+  height: 40vh !important
+  background-color: white
+  z-index: 3 !important
+
+.pizza
+  position: absolute
+  height: 90vh
+  width: 90vh
+  max-width: 65vw
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  @media(orientation: portrait)
+    height: 90vw
+    width: 90vw
+    max-width: 65vh
