@@ -1,14 +1,16 @@
 import "./App.css";
 import Layout from "./layouts/Layout";
-import { CartProvider, CombineDataProvider } from "@/store";
+import { CartProvider, CombineDataProvider, UserProvider } from "@/store";
 function App() {
   return (
     <div className="App">
-      <CombineDataProvider>
-        <CartProvider>
-          <Layout />
-        </CartProvider>
-      </CombineDataProvider>
+      <UserProvider>
+        <CombineDataProvider>
+          <CartProvider>
+            <Layout />
+          </CartProvider>
+        </CombineDataProvider>
+      </UserProvider>
     </div>
   );
 }

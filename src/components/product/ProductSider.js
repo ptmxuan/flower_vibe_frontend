@@ -51,7 +51,6 @@ const getLevelKeys = (items1) => {
   const key = {};
   const func = (items2, level = 0) => {
     items2.forEach((item) => {
-      console.log("hii", item.key);
       key[item.key] = level; // Gán level cho từng item
       if (item.children) {
         func(item.children, level + 1); // Gọi đệ quy cho children
@@ -63,7 +62,7 @@ const getLevelKeys = (items1) => {
 };
 
 const levelKeys = getLevelKeys(items);
-console.log("levelKeys", levelKeys);
+
 function ProductSider({ stateOpenKeys, setStateOpenKeys, setSelectSider }) {
   const navigate = useNavigate();
   const onOpenChange = (openKeys) => {

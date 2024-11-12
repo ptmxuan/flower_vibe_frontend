@@ -7,6 +7,8 @@ function BillOfOrder({
   phoneNumber,
   formattedDate,
   selectedTime,
+  totalPrice,
+  cartProducts,
 }) {
   const [selectedOption, setSelectedOption] = useState("");
 
@@ -24,7 +26,7 @@ function BillOfOrder({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          amount: 500000,
+          amount: totalPrice,
           bankCode: "NCB",
           language: "vn",
         }),
@@ -53,13 +55,13 @@ function BillOfOrder({
         console.error("Error occurred:", error);
       });
   };
-  const totalBillPrice = cartItems.reduce((total, item) => {
-    let priceAfterDiscount = item.gia;
-    if (item.phantramgiamgia > 0) {
-      priceAfterDiscount = item.gia - item.gia * item.phantramgiamgia;
-    }
-    return total + priceAfterDiscount * item.cartQuantity;
-  }, 0);
+  // const totalBillPrice = cartItems.reduce((total, item) => {
+  //   let priceAfterDiscount = item.gia;
+  //   if (item.phantramgiamgia > 0) {
+  //     priceAfterDiscount = item.gia - item.gia * item.phantramgiamgia;
+  //   }
+  //   return total + priceAfterDiscount * item.cartQuantity;
+  // }, 0);
 
   console.log("cartItems", cartItems);
   return (
@@ -90,7 +92,10 @@ function BillOfOrder({
             <p>{selectedTime}</p>
           </div>
         </div>
-        {cartItems.map((item) => {
+        {cartProducts?.map((item) => {
+          const quantityProduct =
+            cartItems.find((cart) => cart.productId === item._id)?.quantity ||
+            1;
           return (
             <div key={item.id}>
               <div className="ten-sp-mua">
@@ -107,16 +112,15 @@ function BillOfOrder({
               </div>
               <div className="so-luong">
                 <h3>Số lượng: </h3>
-                <p>{item.cartQuantity}</p>
-              </div>
-              <div className="tong-gia">
-                <h3>Tổng giá: </h3>
-                <p>{totalBillPrice}</p>
+                <p>{quantityProduct}</p>
               </div>
             </div>
           );
         })}
-
+        <div className="tong-gia">
+          <h3>Tổng giá: </h3>
+          <p>{totalPrice}</p>
+        </div>
         <div className="xac-nhan">
           <Form.Item>
             <Button onClick={handleSubmitOnline}>Thanh Toán</Button>

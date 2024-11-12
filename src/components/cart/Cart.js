@@ -1,86 +1,172 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import CartItem from "./CartItem";
-import { Button, Row, Col } from "antd";
-import { CartContext } from "@/store/CartContext";
-import { useNavigate } from "react-router-dom";
-function Cart() {
-  const nevigate = useNavigate();
-  const { cartItems, setCartItems } = useContext(CartContext);
-  console.log("cartItems", cartItems);
-  // Initialize quantities based on cartItems length
-  const [quantities, setQuantities] = useState([]);
+import { Button, Row, Col, Checkbox, notification } from "antd";
+import { useCart } from "@/hooks/useCart"; // Import useCart hook
+import WOW from "wowjs";
+import "animate.css";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useCombineDataContext } from "@/store/CombinedDataContext";
 
-  // Set initial quantities when cartItems change
+function Cart({ userId, products }) {
+  const { removeFromCart, updateCartItem } = useCart();
+  const navigate = useNavigate();
+  const { quantities, setQuantities, cartItems, getCart } =
+    useCombineDataContext();
+
+  const productIds = cartItems?.items?.map((item) => item.productId);
+  const productQuantity = cartItems?.items?.map((item) => item.quantity); // Số lượng sản phẩm trong giỏ hàng
+  const cartProducts = products?.filter((product) =>
+    productIds?.includes(product._id)
+  );
+
+  const [checkedList, setCheckedList] = useState([]);
+  const checkAll = checkedList.length === cartProducts?.length;
+  const indeterminate =
+    checkedList.length > 0 && checkedList.length < cartProducts.length;
+
   useEffect(() => {
-    setQuantities(cartItems.map((item) => item.cartQuantity || 1)); // Cart quantity hoặc 1 nếu không có
-  }, [cartItems]);
+    new WOW.WOW({ live: false }).init();
+  }, []);
 
-  // Update quantity for a specific item in the cart
-  const updateQuantity = (index, value) => {
-    const newQuantities = [...quantities];
-    newQuantities[index] = value;
-    setQuantities(newQuantities);
+  useEffect(() => {
+    if (cartItems && cartItems?.items?.length > 0) {
+      setQuantities(productQuantity || []);
+    } else {
+      setQuantities([]);
+    }
+  }, [cartItems]);
+  const totalPrice = cartProducts?.reduce((acc, product, index) => {
+    if (checkedList.includes(product._id)) {
+      const price = product.gia ?? 0;
+      const discount =
+        product.phantramgiamgia > 0 ? product.phantramgiamgia : 0;
+      const quantity = quantities[index] ?? 1;
+
+      // Calculate total price with or without discount
+      const itemTotal =
+        discount > 0 ? (price - price * discount) * quantity : price * quantity;
+
+      return acc + itemTotal;
+    }
+    return acc;
+  }, 0);
+
+  const handleCheckout = async () => {
+    const selectedItems = cartItems.items.filter((item) =>
+      checkedList.includes(item.productId)
+    );
+
+    // // Gọi API thanh toán và xóa sản phẩm đã chọn
+    // try {
+    //   // // Giả sử có một hàm gọi API thanh toán
+    //   // await createOrder({ userId, items: selectedItems, totalPrice });
+    //   // await Promise.all(
+    //   //   selectedItems.map((item) => removeFromCart(userId, item.productId))
+    //   // );
+
+    //   notification.success({
+    //     message: "Thanh toán thành công",
+    //     description: "Đơn hàng của bạn đã được tạo.",
+    //     placement: "bottomRight",
+    //   });
+
+    //   // Cập nhật giỏ hàng
+    //   getCart(userId);
+    navigate("/don-hang", { state: { cartItems: selectedItems, totalPrice } });
+    // } catch (error) {
+    //   notification.error({
+    //     message: "Lỗi thanh toán",
+    //     description: "Đã xảy ra lỗi trong quá trình thanh toán.",
+    //     placement: "bottomRight",
+    //   });
+    // }
   };
 
-  // Remove item from cart
-  const removeItem = (productId) => {
-    setCartItems((prevItems) => {
-      const newItems = prevItems.filter((item) => item.id !== productId);
-      const newQuantities = quantities.filter(
-        (_, index) => prevItems[index].id !== productId
-      );
-      setQuantities(newQuantities);
-      return newItems;
+  const handleRemoveItem = async (productId) => {
+    await removeFromCart(userId, productId);
+    getCart(userId);
+    notification.success({
+      message: "Xoá thành công",
+      description: "Đã xoá thành công sản phẩm",
+      placement: "bottomRight",
     });
   };
 
-  // Tính tổng số lượng
-  const totalItems = quantities.reduce((acc, quantity) => acc + quantity, 0);
+  const updateQuantity = async (index, value) => {
+    const newQuantities = [...quantities];
 
-  // Tính tổng tiền
-  const totalPrice = cartItems.reduce((acc, product, index) => {
-    const giaGiam = product.gia - product.gia * product.phantramgiamgia;
-    const priceToUse = product.phantramgiamgia > 0 ? giaGiam : product.gia;
-    return acc + priceToUse * quantities[index];
-  }, 0);
+    if (newQuantities[index] !== value) {
+      newQuantities[index] = value !== undefined ? value : 1;
+      setQuantities(newQuantities);
 
-  const handleCheckOut = () => {
-    nevigate("/don-hang", { state: { cartItems, totalItems } });
+      const productId = productIds[index];
+      await updateCartItem(userId, productId, newQuantities[index]);
+      await getCart(userId);
+    }
   };
+
+  const onCheckAllChange = (e) => {
+    setCheckedList(
+      e.target.checked ? cartProducts.map((product) => product._id) : []
+    );
+  };
+
   return (
     <div className="cart">
       <Row gutter={10}>
         <Col span={16}>
           <div className="cart-area">
             <h1>Giỏ hàng</h1>
-            {cartItems.length === 0 ? (
-              <div className="empty-cart">
-                <p>Giỏ hàng của bạn hiện đang trống.</p>
-              </div>
-            ) : (
-              cartItems.map((product, index) => (
-                <CartItem
-                  key={product.id}
-                  product={product}
-                  value={quantities[index]}
-                  setValue={(value) => updateQuantity(index, value)}
-                  initialValue={quantities[index]}
-                  removeItem={() => removeItem(product.id)}
-                />
-              ))
-            )}
+            <Checkbox
+              indeterminate={indeterminate}
+              onChange={onCheckAllChange}
+              checked={checkAll}
+            >
+              Chọn tất cả
+            </Checkbox>
+            {cartProducts?.map((product, index) => (
+              <CartItem
+                key={product._id}
+                product={product}
+                value={quantities[index] ?? 1}
+                setValue={(value) => updateQuantity(index, value)}
+                initialValue={quantities[index] ?? 1}
+                removeItem={() => handleRemoveItem(product._id)}
+                userId={userId}
+                checked={checkedList.includes(product._id)}
+                onCheck={() => {
+                  setCheckedList((prev) =>
+                    prev.includes(product._id)
+                      ? prev.filter((id) => id !== product._id)
+                      : [...prev, product._id]
+                  );
+                }}
+              />
+            ))}
           </div>
         </Col>
 
         <Col span={8}>
           <div className="order-summary">
-            <h1>Sản phẩm được chọn</h1>
+            <h1>Tóm tắt đơn hàng</h1>
             <div className="order-summary-content">
-              <p>Tổng số sản phẩm: {totalItems}</p>
-              <p>Tổng tiền: {totalPrice.toLocaleString()} VND</p>
-              <Button onClick={handleCheckOut} type="primary" block>
-                Thanh toán
-              </Button>
+              <p>
+                Tổng số sản phẩm:{" "}
+                {quantities.reduce((acc, quantity) => acc + quantity, 0)}
+              </p>
+              <p>Tổng tiền: {totalPrice?.toLocaleString()} VND</p>
+              <div className="order-summary-buttons">
+                <Button type="primary" block onClick={handleCheckout}>
+                  Thanh toán
+                </Button>
+                <Button
+                  type="primary"
+                  block
+                  onClick={() => navigate("/san-pham")}
+                >
+                  Tiếp tục mua hàng
+                </Button>
+              </div>
             </div>
           </div>
         </Col>

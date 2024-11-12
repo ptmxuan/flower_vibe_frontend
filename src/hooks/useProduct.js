@@ -8,15 +8,20 @@ export const useProduct = () => {
   const { loading, data, error, get, post, put, patch, del } =
     useApi(END_POINT_URL);
   const [products, setProducts] = useState([]);
+
   useEffect(() => {
     if (data) {
       setProducts(data);
     }
   }, [data]);
+
+  // Function to get all products
   // Function to get all products
   const getProducts = async () => {
     try {
-      return await get();
+      const result = await get();
+      setProducts(result); // Update products state here
+      return result;
     } catch (err) {
       console.error("Error fetching products:", err);
     }

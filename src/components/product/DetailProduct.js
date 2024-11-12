@@ -6,23 +6,32 @@ import CartQuantity from "@/components/cart/CartQuantity";
 import { useState, useContext } from "react";
 import { CartContext } from "@/store";
 import { useNavigate } from "react-router-dom";
+import { useCombineDataContext } from "@/store/CombinedDataContext";
+import { useCart } from "@/hooks";
 import "@/styles/DetailProduct.scss";
-function DetailProduct({ product }) {
+function DetailProduct({ product, userId }) {
   const [value, setValue] = useState(1);
   const nevigate = useNavigate();
-  const { addToCart, cartItems } = useContext(CartContext);
+
+  const { addToCart } = useCart();
+  const { getCart, cartItems } = useCombineDataContext();
   const [quantity, setQuantity] = useState(1);
 
   const giaGiam = product.gia - product.gia * product.phantramgiamgia;
-
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     if (quantity > 0 && quantity <= product.quantity) {
-      addToCart({ ...product, cartQuantity: quantity });
+      await addToCart(userId, product._id, quantity);
+      await getCart(userId);
+      notification.success({
+        message: "Thành công",
+        description: `${quantity} sản phẩm ${product.ten} đã được thêm vào giỏ hàng!`,
+        placement: "bottomRight",
+      });
     } else {
       notification.error({
         message: "Lỗi số lượng",
         description: "Số lượng sản phẩm không hợp lệ!",
-        placement: "topRight",
+        placement: "bottomRight",
       });
     }
   };

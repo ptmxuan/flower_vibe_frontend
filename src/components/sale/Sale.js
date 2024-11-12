@@ -61,7 +61,7 @@ function Sale() {
           ]}
         >
           {products
-            .filter((item) => item.phantramgiamgia > 0)
+            ?.filter((item) => item.phantramgiamgia > 0)
             .map((product) => (
               <div
                 className="product-item-area"

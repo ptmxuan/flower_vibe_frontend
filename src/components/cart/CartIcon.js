@@ -13,7 +13,7 @@ function CartIcon() {
     (acc, item) => acc + (item.cartQuantity || 1),
     0
   );
-  console.log("cartItems", cartItems);
+
   return (
     <div className="cart-icon">
       <Badge count={totalQuantityCartItem}>

@@ -6,36 +6,36 @@ import { Row, Col } from "antd";
 
 function Product({ selectSider }) {
   const { products } = useCombineDataContext();
-  const location = useLocation();
+  // const location = useLocation();
 
   // Lấy giá trị của query parameter `hinhdang` và `chude` từ URL
-  const queryParams = new URLSearchParams(location.search);
-  const hinhdangFilter = queryParams.get("hinhdang");
-  const chudeFilter = queryParams.get("chude");
-  const mauFilter = queryParams.get("mau");
+  // const queryParams = new URLSearchParams(location.search);
+  // const hinhdangFilter = queryParams.get("hinhdang");
+  // const chudeFilter = queryParams.get("chude");
+  // const mauFilter = queryParams.get("mau");
 
-  console.log("selectSider", selectSider);
-  console.log("chudeFilter", chudeFilter);
+  // console.log("selectSider", selectSider);
+  // console.log("chudeFilter", chudeFilter);
 
-  // Lọc sản phẩm theo `hinhdang` và `chude` nếu có bộ lọc tương ứng
-  const filteredProducts = products.filter((product) => {
-    const matchesHinhdang = hinhdangFilter
-      ? product.hinhdang === hinhdangFilter
-      : true;
+  // // Lọc sản phẩm theo `hinhdang` và `chude` nếu có bộ lọc tương ứng
+  // const filteredProducts = products.filter((product) => {
+  //   const matchesHinhdang = hinhdangFilter
+  //     ? product.hinhdang === hinhdangFilter
+  //     : true;
 
-    const matchesChude = chudeFilter
-      ? product.chude.includes(chudeFilter)
-      : true;
+  //   const matchesChude = chudeFilter
+  //     ? product.chude.includes(chudeFilter)
+  //     : true;
 
-    const matchesMau = mauFilter ? product.mau === mauFilter : true;
+  //   const matchesMau = mauFilter ? product.mau === mauFilter : true;
 
-    // const matchesSelectSiderChude = selectSider
-    //   ? product.chude.includes(selectSider)
-    //   : true;
+  //   // const matchesSelectSiderChude = selectSider
+  //   //   ? product.chude.includes(selectSider)
+  //   //   : true;
 
-    return matchesHinhdang && matchesChude && matchesMau;
-  });
-  console.log("filteredProducts", filteredProducts);
+  //   return matchesHinhdang && matchesChude && matchesMau;
+  // });
+  console.log("products", products);
   return (
     <div className="product">
       <div className="product-title">
@@ -43,7 +43,7 @@ function Product({ selectSider }) {
       </div>
       <div className="product-list">
         <Row gutter={[{ xs: 8, sm: 16, md: 24, lg: 32 }, 16]}>
-          {filteredProducts.map((product) => (
+          {products?.map((product) => (
             <Col key={product._id} xs={24} sm={12} md={8} lg={6} xl={6}>
               <ProductItem product={product} />
             </Col>

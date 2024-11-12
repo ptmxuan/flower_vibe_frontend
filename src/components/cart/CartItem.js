@@ -1,27 +1,39 @@
 import React from "react";
-import { Button, Row, Col } from "antd";
+import { Button, Row, Col, Checkbox } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import CartQuantity from "./CartQuantity";
 
-function CartItem({ product, value, setValue, initialValue, removeItem }) {
-  const giaGiam = product.gia - product.gia * product.phantramgiamgia;
-
+function CartItem({
+  product,
+  value,
+  setValue,
+  initialValue,
+  removeItem,
+  userId,
+  checked,
+  onCheck,
+}) {
+  if (!product) {
+    return null;
+  }
+  const productPriceSale = product.gia - product.gia * product.phantramgiamgia;
   const productTotal =
-    product.phantramgiamgia > 0 ? giaGiam * value : product.gia * value;
+    product.phantramgiamgia > 0
+      ? productPriceSale * value
+      : product.gia * value;
 
   return (
     <div className="cart-item">
       <Row gutter={16}>
-        <Col span={10}>
+        <Col span={2}>
+          <Checkbox checked={checked} onChange={onCheck} />
+        </Col>
+        <Col span={8}>
           <div className="cart-item-img">
-            <img src={product?.hinh} alt="product" />
+            <img src={product.hinh} alt="product" />
             <span className="cart-item-info">
-              <h3>{product?.ten}</h3>
-              {product.phamtramgiamgia > 0 ? (
-                <p>{`${product?.gia?.toLocaleString()} VND`}</p>
-              ) : (
-                <p>{`${giaGiam.toLocaleString()} VND`}</p>
-              )}
+              <h3>{product.ten}</h3>
+              <p>{`${productPriceSale.toLocaleString()} VND`}</p>
             </span>
           </div>
         </Col>
@@ -32,12 +44,13 @@ function CartItem({ product, value, setValue, initialValue, removeItem }) {
               value={value}
               setValue={setValue}
               initialValue={initialValue}
+              userId={userId}
             />
           </div>
         </Col>
         <Col span={6}>
           <div className="cart-item-price">
-            <h3>{`${productTotal?.toLocaleString()} VND`}</h3>
+            <h3>{`${productTotal.toLocaleString()} VND`}</h3>
           </div>
         </Col>
         <Col span={4}>

@@ -61,7 +61,7 @@ function TopProduct() {
           ]}
         >
           {products
-            .filter((item) => item.luotmua > 5)
+            ?.filter((item) => item.luotmua > 5)
             .map((product) => (
               <div
                 className="product-item-area"

@@ -26,6 +26,7 @@
               margin:10px;
             }
             .cart-item {
+              margin-bottom:10px;
               .ant-row {
                 .ant-col {
                   .cart-item-img {
@@ -96,8 +97,10 @@
               margin:10px;
             }
             .order-summary-content {
+              
               .ant-btn.ant-btn-primary.ant-btn-block {
                 background-color: rgb(152 151 39 / 88%);
+                margin-bottom:10px;
               }
               .ant-btn.ant-btn-primary.ant-btn-block:hover {
                 background-color: rgba(180, 152, 28, 0.88);
