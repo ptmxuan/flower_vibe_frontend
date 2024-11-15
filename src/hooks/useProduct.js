@@ -20,7 +20,7 @@ export const useProduct = () => {
   const getProducts = async () => {
     try {
       const result = await get();
-      setProducts(result); // Update products state here
+     
       return result;
     } catch (err) {
       console.error("Error fetching products:", err);

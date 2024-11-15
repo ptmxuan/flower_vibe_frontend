@@ -1,0 +1,29 @@
+.OrderManage {
+  padding: 0px 30px 0 250px;
+  .order-manage-title {
+    .ant-typography {
+      font-family: "Signika", sans-serif;
+      color: #b7bf44;
+      font-size: 40px;
+    }
+  }
+  .select-status {
+    font-size: 20px;
+    margin-top: -16px;
+    .filter-status {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+      margin-top: -10px;
+    }
+    .ant-btn:hover {
+      color: #b7bf44;
+      border-color: #b7bf44;
+    }
+    .ant-btn.ant-btn-primary {
+      background-color: #b7bf44;
+      color: white;
+    }
+  }
+}

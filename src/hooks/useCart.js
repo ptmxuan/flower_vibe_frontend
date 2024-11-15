@@ -7,10 +7,10 @@ const END_POINT = API_END_POINT.cart;
 export const useCart = () => {
   const { get, post, put, del, data, loading, error } = useApi(END_POINT);
   const [cartItems, setCartItems] = useState([]);
-
+  //nhớ useEffect để cập nhật State nhé bé
   useEffect(() => {
     if (data) {
-      setCartItems(data); // Cập nhật cartItems nếu có dữ liệu
+      setCartItems(data);
     }
   }, [data]);
 
@@ -27,9 +27,9 @@ export const useCart = () => {
   const addToCart = async (userId, productId, quantity) => {
     try {
       await post({ userId, productId, quantity }, `${END_POINT}/addToCart`); //api/cart/addToCart
-      const newItem = data; // Giả sử response.data chứa thông tin sản phẩm vừa thêm
 
       setCartItems((prevItems) => {
+        const newItem = data;
         const currentItems = Array.isArray(prevItems) ? prevItems : [];
         return [...currentItems, newItem]; // Thêm sản phẩm mới vào
       });
@@ -76,7 +76,7 @@ export const useCart = () => {
   return {
     loading,
     error,
-    cartItems,
+    cartItems, //trả State ở đây nhen
     getCart,
     addToCart,
     removeFromCart,

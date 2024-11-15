@@ -1,121 +1,116 @@
-import { useEffect, useState, useRef, useCallback } from "react";
-import "./Products.css";
-import { TypeofProductData } from "@/constants/TypeofProductData";
-import axios from "axios";
+import { useState, useEffect } from "react";
+import { Button, Select, Typography, Table, Popconfirm } from "antd";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import productData from "@/constants/ProductData"; // Adjust the import path if needed
 import { Link } from "react-router-dom";
+import "@/styles/ManageProductPage.scss";
+
+const { Title, Text } = Typography;
+const { Option } = Select;
 
 function ProductsBody() {
-  const [fillter, setFillter] = useState("");
-  const [allProducts, setAllProducts] = useState([]);
-  const [products, setProducts] = useState([]);
-  const serverApi = process.env.REACT_APP_SERVER_URL;
-  const serverUrl = process.env.REACT_APP_SERVER;
+  const [filter, setFilter] = useState("");
+  const [products, setProducts] = useState(productData);
 
+  // Filter products based on selected filter
   useEffect(() => {
     setProducts(
-      allProducts.filter((item) => {
-        if (fillter === "") return item;
-        else return item.type === fillter;
-      })
+      filter
+        ? productData.filter((product) => product.hinhdang === filter)
+        : productData
     );
-  }, [fillter]);
+  }, [filter]);
 
-  async function fetchData() {
-    const data = await axios
-      .get(serverApi + "/products")
-      .then((res) => {
-        setProducts(res.data.data);
-        setAllProducts(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+  const deleteProduct = (id) => {
+    setProducts((prevProducts) => prevProducts.filter((item) => item.id !== id));
+  };
 
-  async function deleteProduct(id) {
-    if (window.confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?")) {
-      const data = await axios
-        .delete(serverApi + "/products/" + id)
-        .then((res) => {
-          fetchData();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const columns = [
+    {
+      title: "Hình ảnh",
+      dataIndex: "hinh",
+      key: "hinh",
+      render: (text) => <img src={text} alt="product" style={{ width: 50, height: 50 }} />,
+    },
+    {
+      title: "Tên sản phẩm",
+      dataIndex: "ten",
+      key: "ten",
+    },
+    {
+      title: "Giá",
+      dataIndex: "gia",
+      key: "gia",
+      render: (text) => `${text.toLocaleString()} VND`,
+    },
+    {
+      title: "Đã bán",
+      dataIndex: "luotmua",
+      key: "luotmua",
+    },
+    {
+      title: "Còn lại",
+      dataIndex: "quantity",
+      key: "quantity",
+    },
+    {
+      title: "Loại",
+      dataIndex: "hinhdang",
+      key: "hinhdang",
+    },
+    {
+      title: "Hành động",
+      key: "action",
+      render: (_, record) => (
+        <span>
+          <Link to={`/admin/editProduct/${record.id}`}>
+            <EditOutlined style={{ marginRight: 16 }} />
+          </Link>
+          <Popconfirm
+            title="Bạn có chắc chắn muốn xóa sản phẩm này không?"
+            onConfirm={() => deleteProduct(record.id)}
+            okText="Yes"
+            cancelText="No"
+          >
+            <DeleteOutlined style={{ color: "red" }} />
+          </Popconfirm>
+        </span>
+      ),
+    },
+  ];
 
   return (
     <div className="wrapper">
       <div className="title-page">
-        <h1>Quản lý sản phẩm</h1>
+        <Title level={1}>Quản lý sản phẩm</Title>
       </div>
       <div className="select-type">
-        <h5>Loại sản phẩm</h5>
-        <div className="fillter-type">
-          {TypeofProductData.map((type) => {
-            if (type.title)
-              return (
-                <button
-                  key={type.id}
-                  className={
-                    fillter === type.title ? "active btn-type" : "btn-type"
-                  }
-                  onClick={() => setFillter(type.title)}
-                >
-                  {type.title}
-                </button>
-              );
-            else return null;
-          })}
-        </div>
-        <button className="btn-reset" onClick={() => setFillter("")}>
+        <Title level={5}>Loại sản phẩm</Title>
+        <Select
+          placeholder="Chọn hình dạng sản phẩm"
+          style={{ width: 200 }}
+          onChange={(value) => setFilter(value)}
+          value={filter || undefined}
+        >
+          <Option value="">Tất cả</Option>
+          <Option value="Bó hoa">Bó hoa</Option>
+          <Option value="Lẳng hoa">Lẳng hoa</Option>
+          <Option value="Vòng hoa">Vòng hoa</Option>
+        </Select>
+        <Button onClick={() => setFilter("")} style={{ marginLeft: "8px" }}>
           Đặt lại
-        </button>
+        </Button>
       </div>
       <div className="length-list">
-        <p>{products.length} sản phẩm</p>
+        <Text>{products.length} sản phẩm</Text>
       </div>
-      <section className="itemList manager-products">
-        {products.length > 0 &&
-          products.map((item) => {
-            return (
-              <div className="block-item " key={item.ProductNo}>
-                <div className="item-detail">
-                  <img src={serverUrl + item.images[0].path} alt={item.name} />
-                  {item.name}
-                </div>
-                <div className="saled">
-                  <p>Đã bán:</p>
-                  <p>{item.saleCount}</p>
-                </div>
-                <div className="stored">
-                  <p>Còn lại:</p>
-                  <p>{item.quantity}</p>
-                </div>
-                <div className="control-manage">
-                  <Link to={{ pathname: `/admin/editProduct/${item._id}` }}>
-                    <i className="fa-solid fa-edit"></i>
-                  </Link>
-                  <p>
-                    <i
-                      className="fa-solid fa-trash"
-                      onClick={() => deleteProduct(item._id)}
-                    ></i>
-                  </p>
-                </div>
-              </div>
-            );
-          })}
-      </section>
+      <Table
+        columns={columns}
+        dataSource={products}
+        rowKey="id"
+        pagination={{ pageSize: 8 }}
+        className="manager-products-table"
+      />
     </div>
   );
 }

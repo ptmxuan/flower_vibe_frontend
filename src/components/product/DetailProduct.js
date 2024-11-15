@@ -11,7 +11,7 @@ import { useCart } from "@/hooks";
 import "@/styles/DetailProduct.scss";
 function DetailProduct({ product, userId }) {
   const [value, setValue] = useState(1);
-  const nevigate = useNavigate();
+  const navigate = useNavigate();
 
   const { addToCart } = useCart();
   const { getCart, cartItems } = useCombineDataContext();
@@ -35,14 +35,20 @@ function DetailProduct({ product, userId }) {
       });
     }
   };
-  const handleCheckOut = () => {
+  const handleBuyNow = () => {
     if (quantity > 0 && quantity <= product.quantity) {
-      // Add the product to the cart
-      addToCart({ ...product, cartQuantity: quantity });
-      // Navigate to the order page with updated cartItems
-      nevigate("/don-hang", {
+      navigate("/don-hang", {
         state: {
-          cartItems: [...cartItems, { ...product, cartQuantity: quantity }],
+          cartItems: [
+            {
+              productId: product._id,
+              quantity: quantity,
+            },
+          ],
+          totalPrice:
+            product.phantramgiamgia > 0
+              ? (product.gia - product.gia * product.phantramgiamgia) * quantity
+              : product.gia * quantity,
         },
       });
     } else {
@@ -104,7 +110,7 @@ function DetailProduct({ product, userId }) {
                 <Button onClick={handleAddToCart}>THÊM VÀO GIỎ HÀNG</Button>
               </div>
               <div className="mua-hang">
-                <Button onClick={handleCheckOut}>MUA NGAY </Button>
+                <Button onClick={handleBuyNow}>MUA NGAY </Button>
               </div>
               <div className="mo-ta-sp">
                 <h3>Mô tả: </h3>

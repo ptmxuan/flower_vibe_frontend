@@ -15,7 +15,7 @@ function Order() {
   const { products } = useCombineDataContext();
   const location = useLocation();
   const { cartItems, totalPrice } = location.state || {};
-  console.log("cartItems", cartItems);
+
   const formattedDate = selectedDate
     ? moment(selectedDate.$d).format("DD-MM-YYYY")
     : null;

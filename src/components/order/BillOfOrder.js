@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { Form, Button } from "antd";
+import { Form, Button, notification } from "antd";
+import { useOrder, useCart } from "@/hooks";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useUserContext } from "@/store/UserContext";
+import { useCombineDataContext } from "@/store/CombinedDataContext";
 function BillOfOrder({
   cartItems,
   userName,
@@ -10,10 +15,74 @@ function BillOfOrder({
   totalPrice,
   cartProducts,
 }) {
+  const navigate = useNavigate();
   const [selectedOption, setSelectedOption] = useState("");
-
+  const { createOrder } = useOrder();
+  const { getCart } = useCombineDataContext();
+  const userInfo = useUserContext();
+  const { removeFromCart } = useCart();
+  const userId = userInfo?._id;
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
+  };
+  // Hàm handleSubmit để gửi yêu cầu tạo đơn hàng
+  const handleSubmit = async () => {
+    const customer = {
+      name: userName,
+      phone: phoneNumber,
+      address: address,
+    };
+    const pricePromises = cartItems.map(async (item) => {
+      try {
+        const response = await axios.get(
+          `http://localhost:2512/api/products/${item.productId}`
+        );
+
+        // Sao chép đối tượng và loại bỏ trường `_id`
+        const { gia, productId, quantity } = {
+          ...item,
+          gia: response.data.gia,
+        };
+
+        return { gia, productId, quantity }; // Trả về đối tượng không có `_id`
+      } catch (error) {
+        notification.error({
+          message: `Lỗi khi lấy giá cho sản phẩm ${item.productId}`,
+          description: error.message,
+        });
+      }
+    });
+
+    // const totalPrice = cartItemsWithPrices.reduce((total, item) => {
+    //   return total + (item.gia || 0) * item.quantity;
+    // }, 0);
+    try {
+      const cartItemsWithPrices = await Promise.all(pricePromises);
+      console.log("cartItemsWithPrices", cartItemsWithPrices);
+      await createOrder({
+        userId: userId,
+        items: cartItemsWithPrices,
+        customer: customer,
+        orderDate: formattedDate,
+        deliveryTime: selectedTime,
+      });
+      notification.success({
+        message: "Đơn hàng thành công",
+        description: "Đơn hàng đã được tạo thành công!",
+        placement: "bottomRight",
+      });
+
+      // Gọi API tạo transaction
+      const cartId = cartItems.map((item) => item.productId);
+
+      await removeFromCart(userId, cartId);
+      await getCart(userId);
+    } catch (error) {
+      notification.error({
+        message: "Có lỗi xảy ra khi tạo đơn hàng",
+        description: error.message,
+      });
+    }
   };
   const handleSubmitOnline = async () => {
     // Gửi yêu cầu tới backend
@@ -50,7 +119,9 @@ function BillOfOrder({
           console.log("Không nhận được URL thanh toán.");
         }
       })
-
+      .then(() => {
+        handleSubmit();
+      })
       .catch((error) => {
         console.error("Error occurred:", error);
       });
@@ -63,7 +134,6 @@ function BillOfOrder({
   //   return total + priceAfterDiscount * item.cartQuantity;
   // }, 0);
 
-  console.log("cartItems", cartItems);
   return (
     <div className="bill-of-order">
       <div className="title-bill">
