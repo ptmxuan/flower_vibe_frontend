@@ -45,15 +45,21 @@
         justify-content: flex-start
         width: 10vh
         overflow: hidden
+
+        &:hover
+            cursor: pointer
+            color: #CC0000
+            background: inherit !important
+        
         @media (orientation: portrait)
             flex-basis: 40vw
             // order: -1
 
     &__bin_image
-        z-index: -2
+        z-index: 10
         color: gray
-        width: 10vh
-        height: 10vh
+        width: 8vh
+        height: 8vh
 
         @media (orientation: portrait)
             width: 80vw
@@ -63,5 +69,5 @@
             left: 52vw
 
         &:hover
-            color: red 
+            color: #CC0000
 

@@ -1,50 +1,48 @@
-import { useContext, useEffect, useState } from 'react';
-
+import { useContext, useState } from 'react';
+import { Collapse } from 'antd';
 import './AddPanel.sass';
-
 import { AppContext } from '../../AppContext';
 import { AddIngredient } from './AddIngredient/AddIngredient';
-import { Tab } from './Tab/Tab';
+import { Typography } from 'antd';
+import { CaretDownOutlined } from '@ant-design/icons';
+
+const { Title } = Typography;
+const { Panel } = Collapse;
 
 export const AddPanel = () => {
   const { addButtonList } = useContext(AppContext);
-  const [activePanel, setActivePanel] = useState('Hoa hồng');
+  const [activePanel, setActivePanel] = useState(['Hoa hồng']); // Active panel mặc định
 
-  useEffect(() => {
-    window.addEventListener('keydown', tabSwitcher);
-    return () => {
-      window.removeEventListener('keydown', tabSwitcher);
-    };
-  });
-
-  const tabSwitcher = (e) => {
-    const idx = panels.indexOf(activePanel);
-    if (e.key === 'd') {
-      const newActive = idx < panels.length - 1 ? idx + 1 : 0;
-      setActivePanel(panels[newActive]);
-    } else if (e.key === 'a') {
-      const newActive = idx !== 0 ? idx - 1 : panels.length - 1;
-      setActivePanel(panels[newActive]);
-    }
+  const onCollapseChange = (keys) => {
+    setActivePanel(keys); // Cập nhật trạng thái collapse đang mở
   };
-
-  // const {dataPanel} = useDesign()
-  // const panels = dataPanel; sau này sẽ dùng cách này thay vì cố định
-  const panels = ['Hoa hồng'];
-
-
-  const addbuttons = addButtonList[activePanel].map((elem, idx) => {
-    return <AddIngredient key={elem + idx} type={elem} />;
-  });
-  
-  const tabs = Object.keys(addButtonList).map((elem, idx) => (
-    <Tab title={elem} key={elem + idx} active={activePanel} setActive={setActivePanel} />
-  ));
 
   return (
     <div className="ingred_adder hidden-element">
-      <div className="ingred_adder__tabs">{tabs}</div>
-      <div className="ingred_adder__buttons">{addbuttons}</div>
+      <Title level={4}>Danh sách các thành phần thiết kế</Title>
+      <Collapse 
+        accordion 
+        activeKey={activePanel} 
+        onChange={onCollapseChange} 
+        className="ingred_adder__collapse"
+      >
+        {Object.keys(addButtonList).map((key) => (
+          <Panel
+            key={key}
+            header={
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <span style={{fontSize: 14, fontWeight: 500}}>{key}</span>
+              </div>
+            }
+          >
+            <div className="ingred_adder__buttons">
+              {addButtonList[key].map((elem, idx) => (
+                <AddIngredient key={`${elem}-${idx}`} type={elem} />
+              ))}
+            </div>
+          </Panel>
+        ))}
+      </Collapse>
     </div>
   );
 };

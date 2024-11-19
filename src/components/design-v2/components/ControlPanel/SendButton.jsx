@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { AppContext } from "../../AppContext";
 
 import "./SendButton.sass";
-import { ArrowUpOutlined } from "@ant-design/icons";
+import { UploadOutlined, UpSquareOutlined } from "@ant-design/icons";
 
 export const SendButton = () => {
   const { setCurrentIngred } = useContext(AppContext);
@@ -184,7 +184,7 @@ export const SendButton = () => {
     <div className="send_button">
        <Tooltip className='send_button__tooltip' placement="bottom" >
         <Button
-          icon={<ArrowUpOutlined />}
+          icon={<UploadOutlined />}
           className="send_button__button"
           size="large"
           type="primary"

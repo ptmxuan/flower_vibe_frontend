@@ -8,6 +8,7 @@ import {
 import { AddPanel } from "./components/AddPanel/AddPanel";
 import { ControlPanel } from "./components/ControlPanel";
 import { IngredientDispenser } from "./components/IngredientDispenser/IngredientDispenser";
+import { TotalComposition } from "./components/TotalComposition";
 
 import "./App.sass";
 
@@ -22,6 +23,8 @@ const Design2 = () => {
         <IngredientDispenser />
 
         <ControlPanel />
+
+        <TotalComposition/>
 
         <AddPanel />
       </div>
