@@ -1,8 +1,8 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState } from "react";
 
-import { ReactComponent as TomatoImg } from '../../../media/tomato_big.svg';
+import { ReactComponent as TomatoImg } from "../../../media/tomato_big.svg";
 
-import './Ingredient.sass';
+import "./Ingredient.sass";
 
 const Ingredient = (props) => {
   const [posX, setPosX] = useState(100);
@@ -13,7 +13,9 @@ const Ingredient = (props) => {
   // problem with frozen status or relX and relY
   const onMouseMoveHandler = useCallback((e) => {
     const { clientX, clientY } = e;
-    console.log(`clientX: ${clientX} | relX: ${relX} | cX-rX: ${clientX - relX}`);
+    console.log(
+      `clientX: ${clientX} | relX: ${relX} | cX-rX: ${clientX - relX}`
+    );
     setPosX(clientX - relX);
     setPosY(clientY - relY);
   }, []);
@@ -25,16 +27,20 @@ const Ingredient = (props) => {
     setRelX(clientX - posX);
     setRelY(clientY - posY);
     // console.log(clicked)
-    window.addEventListener('mousemove', onMouseMoveHandler);
+    window.addEventListener("mousemove", onMouseMoveHandler);
   };
 
   const onMouseUpHandler = (e) => {
     // console.log(3)
-    window.removeEventListener('mousemove', onMouseMoveHandler);
+    window.removeEventListener("mousemove", onMouseMoveHandler);
   };
 
   return (
-    <div className="ingred_portal" onMouseDown={onMouseDownHandler} onMouseUp={onMouseUpHandler}>
+    <div
+      className="ingred_portal"
+      onMouseDown={onMouseDownHandler}
+      onMouseUp={onMouseUpHandler}
+    >
       <p>X - {relX}</p>
       <p>Y - {relY}</p>
       <TomatoImg

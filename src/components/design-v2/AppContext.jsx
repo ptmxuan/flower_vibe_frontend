@@ -14,6 +14,11 @@ const AppProvider = ({ children }) => {
       'Hoa mẫu đơn',
       'Hoa hồng',
     ],
+    'Hoa hồng 2': [
+      'Hoa hồng đỏ',
+      'Hoa mẫu đơn',
+      'Hoa hồng',
+    ],
   });
 
   const [images, setImages] = useState({

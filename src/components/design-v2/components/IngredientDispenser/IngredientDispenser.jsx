@@ -1,13 +1,14 @@
 import { useContext } from 'react';
 
-import './IngredientDispencer.sass';
+import './IngredientDispenser.sass';
 
 import { AppContext } from '../../AppContext';
 import { Ingredient } from './Ingredient/Ingredient';
 
 import { ReactComponent as BinImg } from '../../media/dispencer_bin.svg';
+import { Tooltip } from 'antd';
 
-export const IngredientDispencer = () => {
+export const IngredientDispenser = () => {
   const { images, ingreds, setIngreds, currentIngred, setCurrentIngred } = useContext(AppContext);
 
   const ingredients = ingreds.map((elem) => (
@@ -24,7 +25,7 @@ export const IngredientDispencer = () => {
   ));
 
   return (
-    <div className="ingred_dispencer">
+    <div className="ingred_dispencer second_shot">
       <div className="ingred_dispencer__plate">
         <div className="ingred_dispencer__plate_image">
           {/* <PlateImg /> */}
@@ -32,11 +33,17 @@ export const IngredientDispencer = () => {
         {ingredients}
       </div>
 
-      <div className="ingred_dispencer__bin">
+    {
+      currentIngred !== null &&
+      <div className="ingred_dispencer__bin hidden-element">
         <div className="ingred_dispencer__bin_image">
+        <Tooltip placement="top" title="xóa toàn bộ các thành phần thiết kế" onClick={() =>setIngreds([])}>
           <BinImg />
+        </Tooltip>
         </div>
       </div>
+    }
+
     </div>
   );
 };

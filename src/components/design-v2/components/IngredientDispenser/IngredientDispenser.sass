@@ -2,7 +2,7 @@
     // position: relative
     z-index: 3
     display: flex
-    flex-basis: 14vw
+    flex-basis: 8vw
     flex-direction: column
     flex-grow: 0
     justify-content: space-between
@@ -13,7 +13,9 @@
 
     &__plate
         // background-image: url('dispencer_plate.svg')
-        flex-basis: 40vh
+        // background-color: rgba(0, 0, 0, 0.2)
+        flex-basis: 80vh
+        width: 15vw
         // position: relative
         display: flex
         align-items: center
@@ -26,7 +28,7 @@
         bottom: 60vh
         right: 86vw
         width: 80vh
-        height: 80vh
+        height: 60vh
         @media (orientation: portrait)
             width: 80vw
             height: 80vw
@@ -34,26 +36,38 @@
             right: 52vw
 
     &__bin
-        // background-color: #2e2d2d
+        // background-color: rgba(0, 0, 0, 0.2)
         align-items: center
         justify-content: center
-        flex-basis: 40vh
+        flex-basis: 10vh
+        display: flex
+        flex-direction: column
+        justify-content: flex-start
+        width: 10vh
         overflow: hidden
+
+        &:hover
+            cursor: pointer
+            color: #CC0000
+            background: inherit !important
+        
         @media (orientation: portrait)
             flex-basis: 40vw
             // order: -1
 
     &__bin_image
-        z-index: -2
-        position: absolute
-        top: 82vh
+        z-index: 10
         color: gray
-        right: 92vw
-        width: 20vh
-        height: 20vh
+        width: 8vh
+        height: 8vh
+
         @media (orientation: portrait)
             width: 80vw
             height: 80vw
-            top: calc( 14vh - 80vw)
+            top: calc(14vh - 80vw)
             right: unset
             left: 52vw
+
+        &:hover
+            color: #CC0000
+

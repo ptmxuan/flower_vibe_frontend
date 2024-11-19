@@ -1,100 +1,19 @@
 .ingred_adder
-    position: absolute
-    right: 0
-    z-index: 10
+  padding: 0 16px 0 0
+  position: absolute
+  right: 0
+  z-index: 10
+  flex-grow: 0
+  flex-basis: 17vw
+  @media(orientation: portrait)
+    flex-basis: 27vh
+
+  &__collapse
+    background-color: unset
+
+  &__buttons
+    color: #237dcb !important
     display: flex
-    flex-grow: 0
-    flex-basis: 17vw
-    @media(orientation: portrait)
-        flex-direction: column
-        flex-basis: 27vh
-
-    &__tabs
-        z-index: 1
-        width: 5vh
-        display: flex
-        flex-direction: column
-        justify-content: space-between
-        background-color: unset
-        @media(orientation: portrait)
-            width: unset
-            height: 7vw
-            flex-direction: row
-
-    &__tab
-        height: 20vh
-        background-color: #ccc
-        border-radius: 1vh 0 0 1vh
-        font-size: 4vh
-        line-height: 5vh
-        writing-mode: vertical-rl
-        text-orientation: mixed
-        cursor: pointer
-        transform: scale(1.1)
-        -webkit-tap-highlight-color: rgba(0,0,0,0)
-        -webkit-tap-highlight-color: transparent
-        outline: none
-        transition: transform .3s
-        @media(orientation: portrait)
-            height: unset
-            writing-mode: unset
-            width: 17vw
-            font-size: 4.5vw
-            line-height: 7vw
-            border-radius: 1vw 1vw 0 0
-
-        &--active, &:focus, &:hover
-            background-color: #fff
-            transform: scale(1.2)
-
-    &__buttons
-        z-index: 2
-        display: flex
-        flex-direction: column
-        justify-content: center
-        flex-basis: 14vw
-        flex-grow: 1
-        background-color: #fff
-        position: relative
-
-        @media(orientation: portrait)
-            flex-direction: row
-            flex-wrap: wrap
-            align-content: stretch
-            justify-content: space-evenly
-            height: 50vw
-            flex-basis: 22vh
-            flex-grow: 1
-            padding: 4px 4px 4px 4px
-            position: unset
-
-    &__button
-        display: block
-        color: #fff
-        background-color: #E7655C
-        margin: 1.4vh
-        padding: 1vh 0.2vh
-        font-size: 4vh
-        line-height: 1
-        border: 0px
-        border-radius: 1vh
-        cursor: pointer
-        transition: .3s
-        -webkit-tap-highlight-color: rgba(0,0,0,0)
-        -webkit-tap-highlight-color: transparent
-        outline: none
-        @media(orientation: portrait)
-            padding: 0
-            border-radius: 1vw
-            font-size: 5vw
-            font-weight: bold
-            width: 30%
-            border: 0px solid transparent
-            margin: 2px
-            flex-grow: 1
-            &--wide
-                width: 45%
-
-        &:hover, &:focus
-            color: #fff
-            background-color: #54cc94
+    flex-direction: column
+    gap: 8px
+    width: 100%

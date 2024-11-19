@@ -1,10 +1,12 @@
 import gsap from 'gsap';
-import React, { Component, Suspense } from 'react';
+import { Component, Suspense } from 'react';
 import Hammer from 'react-hammerjs';
 
 import './Ingredient.sass';
 
 import { IngredControlPanel } from './IngredControlPanel/IngredControlPanel';
+import { Button, Tooltip } from 'antd';
+import { CloseOutlined } from '@ant-design/icons';
 
 export class Ingredient extends Component {
   constructor(props) {
@@ -12,7 +14,7 @@ export class Ingredient extends Component {
     this.vertical = ['camembert half', 'basil', 'octopus'];
     this.verticalCounter = ['prosciutto', 'ham', 'camembert', 'rucola', 'mussel opened', 'mussel closed', 'shrimp'];
     this.ingred = this.props.imag[this.props.type];
-    this.tops = document.querySelector('.ingred_dispencer__plate').offsetHeight / 2;
+    this.tops = document.querySelector('.ingred_dispencer__plate').offsetHeight / 4.5;
     this.lefts = document.querySelector('.ingred_dispencer__plate').offsetWidth / 2;
     this.rotate = window.matchMedia('(orientation: landscape)').matches
       ? this.vertical.includes(this.props.type)
@@ -26,7 +28,7 @@ export class Ingredient extends Component {
       y: this.tops,
       relX: 0,
       relY: 0,
-      scale: 1,
+      scale: 0.7,
       touchInitialScale: 1,
       rotate: this.rotate,
       touchInitialRotate: this.rotate,
@@ -270,6 +272,16 @@ export class Ingredient extends Component {
   onFocusHandler = (e) => {
     this.props.setCurrent(this.props.id);
   };
+  
+  onDelete = (e) => {
+    const tl = gsap.timeline({
+      onComplete: () => {
+        this.props.setIngreds(this.props.ingreds.filter((el) => el.id !== this.props.id));
+      },
+    });
+    const item = document.getElementById(this.props.id);
+    tl.to(item, { duration: 1, scale: 0.2, opacity: 0.7, transformOrigin: 'top left', transform: 'rotateZ(120deg)' });
+  };
 
   render() {
     const IngredientImage = this.state.ingred;
@@ -304,11 +316,21 @@ export class Ingredient extends Component {
             }}
           >
             <Suspense fallback={<div />}>
-              <IngredientImage />
+                {
+                this.props.id === this.props.current &&
+                <div className='ingredient_controller'>
+                  <Tooltip title="Xóa thành phần này" className='icon_delete' onMouseDown={this.onDelete}>
+                    <Button shape="circle" size='middle' icon={<CloseOutlined />}></Button>
+                  </Tooltip>
+                </div>
+                }
+                <IngredientImage className={this.props.id === this.props.current && 'ingredient_selected'}/>
             </Suspense>
           </div>
           {this.props.id === this.props.current ? (
+            <>
             <IngredControlPanel listener={this.onKeyHandler} ingredControl={this.ingredControl} />
+            </>
           ) : null}
         </div>
       </Hammer>
