@@ -42,7 +42,7 @@ export const AddPanel = () => {
   ));
 
   return (
-    <div className="ingred_adder">
+    <div className="ingred_adder hidden-element">
       <div className="ingred_adder__tabs">{tabs}</div>
       <div className="ingred_adder__buttons">{addbuttons}</div>
     </div>

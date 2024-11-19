@@ -14,7 +14,7 @@
         0%
             transform: scale(1)
         8%
-            transform: scale(1.2)
+            transform: scale(1)
         16%
             transform: scale(1)
         100%
@@ -103,3 +103,18 @@
 
     &--active svg
         animation: selector 6s infinite
+
+.ingredient_controller
+    position: relative
+
+.icon_delete
+   color: #3385D7
+   border: 2px solid #3385D7
+   z-index: 2
+   position: absolute
+   top: -12px
+   left: -12px
+
+.ingredient_selected
+    z-index: 1
+    border: 2px solid #3385D7
