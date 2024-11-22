@@ -3,13 +3,13 @@ import UserInfor from "./UserInfor";
 import UserHistoryOrder from "./UserHistoryOrder";
 function UserContent() {
   return (
-    <Row>
-      <Col span={12}>
+    <Row gutter={[16, 16]}>
+      <Col span={8}>
         <div className="user-content-left">
           <UserInfor />
         </div>
       </Col>
-      <Col span={12}>
+      <Col span={16}>
         <div className="user-content-right">
           <UserHistoryOrder />
         </div>
