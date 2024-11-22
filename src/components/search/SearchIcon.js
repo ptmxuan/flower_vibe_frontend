@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 function SearchIcon() {
   const nevigate = useNavigate();
   const handleNevigateSearch = () => {
-    nevigate("/tim-kiem");
+    nevigate("/san-pham");
   };
   return (
     <div className="search-icon">

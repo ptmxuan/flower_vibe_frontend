@@ -3,15 +3,16 @@ import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, message, Space } from "antd";
 import themeData from "@/constants/ThemeData";
 import shapeData from "@/constants/ShapeData";
-import flowerRetailData from "@/constants/FlowerRetailData";
 import serviceData from "@/constants/ServiceData";
 import SearchIcon from "@/components/search/SearchIcon";
 import CartIcon from "@/components/cart/CartIcon";
 import UserIcon from "@/components/user/UserIcon";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom"; 
+
 const onClick = ({ key }) => {
   message.info(`Click on item ${key}`);
 };
+
 function Nav() {
   const navigate = useNavigate();
 
@@ -24,14 +25,17 @@ function Nav() {
     // Điều hướng đến trang sản phẩm với query `chude`
     navigate(`/san-pham?chude=${encodeURIComponent(key)}`);
   };
+
   return (
     <div className="nav">
-      <div className="nav-left">
+      <div className="nav-left" onClick={() => navigate('/')}>
         <h1>FlowerVibe</h1>
       </div>
       <div className="nav-center">
-        <a href="/">TRANG CHỦ</a>
-        {/* chủ đề */}
+        {/* Chuyển thẻ a thành Link */}
+        <Link to="/">TRANG CHỦ</Link>
+
+        {/* Chủ đề */}
         <p>
           <Dropdown
             menu={{
@@ -48,7 +52,7 @@ function Nav() {
           </Dropdown>
         </p>
 
-        {/* hình dáng */}
+        {/* Hình dáng */}
         <p>
           <Dropdown
             menu={{
@@ -65,7 +69,7 @@ function Nav() {
           </Dropdown>
         </p>
 
-        {/* DỊCH VỤ */}
+        {/* Dịch vụ */}
         <p>
           <Dropdown
             menu={{
@@ -82,8 +86,8 @@ function Nav() {
           </Dropdown>
         </p>
 
-        {/* SẢN PHẨM */}
-        <a href="/san-pham">SẢN PHẨM</a>
+        {/* Sản phẩm */}
+        <Link to="/san-pham">SẢN PHẨM</Link>  {/* Sử dụng Link thay vì a */}
       </div>
       <div className="nav-right">
         <div className="search-area">

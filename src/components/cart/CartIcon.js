@@ -10,8 +10,6 @@ function CartIcon() {
   const navigate = useNavigate();
   const { cartItems } = useCombineDataContext();
 
-  // Tính toán tổng số lượng sản phẩm
-
   const cartQuantities = cartItems?.items?.map((item) => item.quantity) || [];
   const totalQuantity = cartQuantities?.reduce(
     (total, quantity) => total + quantity,
@@ -25,7 +23,7 @@ function CartIcon() {
   return (
     <div className="cart-icon">
       <Badge count={totalQuantity}>
-        <Button onClick={handleNavigateCart} icon={<ShoppingCartOutlined />} />
+        <Button type="text" onClick={handleNavigateCart} icon={<ShoppingCartOutlined />} />
       </Badge>
     </div>
   );

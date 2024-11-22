@@ -1,25 +1,15 @@
 .product-page {
-  .header {
-    position: fixed;
-    z-index: 9999;
-    top: 0;
-    left: 0;
-  }
+  min-height: 100vh;
   .ant-layout.ant-layout-has-sider {
-    padding: 112px 40px 20px 40px;
+    width: 100%;
     .ant-layout-sider.ant-layout-sider-dark {
       background-color: white;
       display: flex;
       justify-content: center;
       margin-top: 20px;
-      position: fixed;
-      z-index: 9997;
-      top: 13%;
-      left: 0;
       max-width: 15% !important;
       min-width: 15% !important;
       .ant-layout-sider-children {
-        margin-left: 40px;
         background-color: #f5f5f5;
         .product-sider {
           margin-left: 80px;
@@ -47,7 +37,7 @@
       }
     }
     .ant-layout-content {
-      padding-left: 300px;
+      padding-left: 100px;
       .product {
         .product-title {
           color: rgb(167, 167, 8);
@@ -55,18 +45,59 @@
           margin-bottom: 25px;
           font-family: "Signika", sans-serif;
         }
+        .product-tags {
+          padding: 10px 0;
+        }
+        
+        .product-tags .filter{
+          font-size: 20px;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          align-content: center;
+          justify-content: flex-start;
+          gap: 5px;
+        }
+
+        // .product-tags .filter p{
+        //   font-size: 40px;
+        // }
+        
+        .product-tags .filter-tags {
+          display: flex;
+          flex-wrap: wrap;
+          padding: 4px 0;
+        }
+        
+        .product-tags .ant-tag {
+          color: rgb(167, 167, 8);
+          background-color: white;
+          border-color: #b7bf44;
+          font-size: 16px; 
+          padding: 6px 12px 10px 12px;
+          margin: 0;
+          border-radius: 8px; 
+        }
+        
+        .product-tags .ant-tag + .ant-tag {
+          margin-left: 8px; 
+        }
+        
         .product-list {
+          overflow: hidden;
+          padding: 10px;
           .ant-row {
             .ant-col {
               .product-item:hover {
-                transform: translateY(-5px);
+                transform: scale(1.01);
               }
               .product-item {
-                height: 400px;
+                transition: transform 0.3s ease-in-out;
+                -height: 400px;
                 border: 1px solid #b7bf44;
                 box-sizing: border-box;
                 border-radius: 8px;
-                padding: 8px;
+                padding: 8px 0;
                 h1,
                 h3 {
                   margin: 0;
@@ -77,27 +108,50 @@
                   object-fit: cover;
                   border-radius: 5px;
                   margin-top: 8px;
+                  transition: border-radius 0.3s ease; /* Thêm transition để có hiệu ứng mượt mà */
+                
+                  &:hover {
+                    border-radius: 5px;
+                  }
                 }
+
+                .ant-image-mask {
+                  border-radius: 5px;
+                  margin-top: 8px;
+                }              
+                
                 .ten-sp {
                   font-size: 22px;
                   font-family: "Signika", sans-serif;
                   color: #b7bf44;
                   margin-top: 15px;
                 }
-                .gia-sp {
-                  font-size: 15px;
-                  font-family: "Signika", sans-serif;
-                  margin: 15px 0;
-                  text-decoration: line-through;
-                }
-                .gia-giam {
-                  margin: 15px 0;
+                .gia-container{
+                  height: 120px;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: flex-end;
+                  .gia-sp {
+                    font-size: 15px;
+                    font-family: "Signika", sans-serif;
+                    margin: 15px 0;
+                    text-decoration: line-through;
+                  }
+                  .gia-giam {
+                    color: red;
+                    margin: 0 0;
+                  }
                 }
                 .xemchitiet {
                   text-decoration: underline;
                 }
               }
             }
+          }
+          .title {
+            width: 100%;
+            font-size: 16px;
+            text-align: center;
           }
         }
       }
@@ -114,5 +168,5 @@
 }
 .ant-dropdown {
   position: absolute;
-  z-index: 100000;
+  z-index: 100;
 }
