@@ -43,10 +43,14 @@ export const useApi = (endpointUrl) => {
     return axiosGetData_
       .post(customEndpoint ? customEndpoint : endpointUrl, payload)
       .then((response) => {
+        console.log(response.data);
         setData(response.data);
-        return response.data; //return chỗ này
+        return response.data; 
       })
-      .catch((error) => setError(error))
+      .catch((error) => {
+        setError(error)
+        return error.response
+      })
       .finally(() => setLoading(false));
   };
 
