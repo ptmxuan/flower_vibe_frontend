@@ -10,3 +10,25 @@
     }
   }
 }
+
+/* SearchComponent.scss */
+.search-component {
+  display: flex;
+  justify-content: center;
+  height: 50px;
+  align-items: center;
+
+  .search-bar {
+    width: 45vw;
+
+    /* Khi hover vào input */
+    .ant-input-affix-wrapper:hover {
+      border-color: #b7bf44 !important;
+    }
+
+    /* Khi input có focus */
+    .ant-input-affix-wrapper-focused {
+      border-color: #b7bf44 !important;
+    }
+  }
+}

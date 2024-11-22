@@ -16,18 +16,20 @@ export const CombineDataProvider = ({ children }) => {
   const userId = userInfor?._id;
 
   useEffect(() => {
+
     const fetchData = async () => {
       try {
+        
+        if (!products || products.length === 0) {
+          await getProducts();
+        }
+
         // Chỉ gọi các API khi chưa có dữ liệu và có userId
         if (!userId) return;
 
         // Gọi API lấy giỏ hàng nếu chưa tải
         if (!cartItems || cartItems.length === 0) {
           await getCart(userId); //cái nào có prop thì truyền vô
-        }
-        // Gọi API lấy tất cả sản phẩm nếu chưa tải
-        if (!products || products.length === 0) {
-          await getProducts();
         }
 
         if (!orders || orders.length === 0) {
@@ -41,7 +43,7 @@ export const CombineDataProvider = ({ children }) => {
     };
 
     fetchData();
-  }, [userId]); // Thêm dependencies để kiểm soát việc gọi API
+  }, []); // Thêm dependencies để kiểm soát việc gọi API
   
   //truyền data bên trên vào value để gọi
   const value = {

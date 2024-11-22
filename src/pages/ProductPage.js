@@ -13,7 +13,7 @@ function ProductPage() {
     <div className="product-page">
       <Header />
       <Layout>
-        <Sider width="25%">
+        <Sider>
           <ProductSider
             stateOpenKeys={stateOpenKeys}
             setStateOpenKeys={setStateOpenKeys}
@@ -28,7 +28,9 @@ function ProductPage() {
           />
         </Content>
       </Layout>
-      <Footer />
+      <div className="footer">
+        <Footer />
+      </div>
     </div>
   );
 }
