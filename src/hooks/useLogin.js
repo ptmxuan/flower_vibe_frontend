@@ -17,7 +17,6 @@ export const useLogin = () => {
     if (data && data.user) {
       localStorage.setItem("user", JSON.stringify(data.user));
       setDataLogin(data.user);
-
     }
   }, [data, error]);
 
@@ -25,21 +24,19 @@ export const useLogin = () => {
   const login = async (username, password) => {
     try {
       const response = await post({ username, password });
-      console.log("Login response:", response);
       if (response && response.user) {
         localStorage.setItem("user", JSON.stringify(response.user));
         setDataLogin(response.user);
-        return 'success'
+        return "success";
       } else {
-        return response.data.error
+        return response.error;
       }
     } catch (err) {
       const errorMessage = err.response?.data?.error || "Login failed";
       console.error("Error during login:", errorMessage);
-      return false
+      return false;
     }
   };
 
-  console.log("dataLogin", dataLogin);
   return { login, loading, error, dataLogin };
 };

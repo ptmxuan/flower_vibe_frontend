@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
 
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 const getAccessToken = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   return user ? user.token : null;
@@ -15,7 +17,6 @@ const configAxios = {
 
 const axiosGetData_ = axios.create(configAxios);
 
-// Thêm interceptor để cập nhật header Authorization với token mới nhất
 axiosGetData_.interceptors.request.use((config) => {
   const token = getAccessToken();
   if (token) {
@@ -29,8 +30,9 @@ export const useApi = (endpointUrl) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
-  const get = (query = "", customEndpoint = "") => {
+  const get = async (query = "", customEndpoint = "") => {
     setLoading(true);
+    // await delay(1000);
     return axiosGetData_
       .get((customEndpoint ? customEndpoint : endpointUrl) + query)
       .then((response) => setData(response.data))
@@ -43,23 +45,29 @@ export const useApi = (endpointUrl) => {
     return axiosGetData_
       .post(customEndpoint ? customEndpoint : endpointUrl, payload)
       .then((response) => {
-        console.log(response.data);
         setData(response.data);
-        return response.data; 
+        return response.data;
       })
       .catch((error) => {
-        setError(error)
-        return error.response
+        setError(error);
+        return error.response.data;
       })
       .finally(() => setLoading(false));
   };
 
-  const put = (payload, customEndpoint = "") => {
+  const put = async (payload, customEndpoint = null) => {
     setLoading(true);
+    // await delay(1000);
     return axiosGetData_
       .put(customEndpoint ? customEndpoint : endpointUrl, payload)
-      .then((response) => setData(response.data))
-      .catch((error) => setError(error))
+      .then((response) => {
+        setData(response.data);
+        return response.data;
+      })
+      .catch((error) => {
+        setError(error.response?.data || error.message);
+        return error.response.data;
+      })
       .finally(() => setLoading(false));
   };
 

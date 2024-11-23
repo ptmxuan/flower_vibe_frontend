@@ -7,7 +7,7 @@ const { Content } = Layout;
 function UserPage() {
   return (
     <div className="user-page">
-      <Header />
+      {/* <Header /> */}
       <Layout>
         <Content>
           <User />
