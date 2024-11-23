@@ -11,7 +11,6 @@ export const useProduct = () => {
 
   useEffect(() => {
     if (data) {
-      console.log(data,data);
       setProducts(data);
     }
   }, [data]);

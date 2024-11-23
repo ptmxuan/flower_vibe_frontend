@@ -8,7 +8,6 @@ function UserHistoryOder() {
   const { orders, getAllOrders } = useOrder();
 
   useEffect(() => {
-    console.log("userInfo", userInfo);
     if (userInfo) {
       getAllOrders(userInfo._id);
     }

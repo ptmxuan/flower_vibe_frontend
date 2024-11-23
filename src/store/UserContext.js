@@ -4,7 +4,7 @@ const UserContext = createContext(null);
 
 const UserProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState(null);
-  console.log("userInfo", userInfo);
+
   useEffect(() => {
     const storedUserInfo = JSON.parse(localStorage.getItem("user"));
 

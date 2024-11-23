@@ -1,12 +1,12 @@
 .user-page {
   display: flex;
   flex-direction: column;
-  .header {
-    position: fixed;
-    z-index: 9999;
-    top: 0;
-    left: 0;
-  }
+  // .header {
+  //   position: fixed;
+  //   z-index: 9999;
+  //   top: 0;
+  //   left: 0;
+  // }
 
   .ant-layout-content {
     padding: 120px 4vw 0 4vw;
@@ -23,9 +23,9 @@
           margin-bottom: 20px;
           margin-top: 10px;
           
-          .user-infor {
+          .user-info {
             padding-bottom: 20px;
-
+          
             .user-title {
               border: 1px solid rgb(248, 248, 174);
               font-family: "Signika", sans-serif;
@@ -37,27 +37,111 @@
               align-items: center;
             }
 
-            .user-info {
-              padding-top: 20px;
+            .user-body {
+              padding: 0 10px;
+            
+              :where(.ant-tabs .ant-tabs-tab:hover) .ant-tabs-tab-btn {
+                color: #363636 !important;  
+              }
 
-              /* Các dòng thông tin người dùng */
-              .account-name, .user-name, .user-phone, .user-male {
+              .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+                color: #363636 !important; 
+                font-weight: 500; 
+              }
+             .ant-tabs-ink-bar {
+              position: absolute;
+              background: #000000;
+              pointer-events: none;
+              }
+            }
+            
+            .user-info {
+              padding: 0 10px;
+            
+              .account-name,
+              .user-name,
+              .user-phone,
+              .user-male {
                 display: flex;
                 justify-content: flex-start;
                 align-items: center;
-                gap: 20px;
-                
-                & > p {
-                  padding-left: 50px;
+                margin: 0 15px 15px 0;
+            
+                .title {
+                  width: 125px;
+                  font-weight: bold;
+                  text-align: left;
+                  margin: 0;
+                  padding: 5px 0;
+                }
+            
+                .content {
+                  flex: 1;
+                  text-align: left;
+                  margin: 0;
                 }
               }
-
-              /* Thêm margin riêng cho từng dòng */
-              .account-name {
-                gap: 50px;
+            
+              .user-actions {
+                display: flex;
+                justify-content: flex-start;
+                gap: 10px;
+                margin-top: 20px;
+              }
+            
+              .ant-input {
+                width: 100%; // Đảm bảo input chiếm hết chiều rộng có sẵn
               }
             }
+            
+            .change-password {
+              padding: 0 10px;
+            
+              .ant-form-item-explain {
+                margin-top: 5px;
+              }
+
+              .box {
+                display: flex;
+                flex-direction: row;
+                align-items: flex-start;
+                justify-content: flex-start;
+                margin: 0 10px 10px 0;
+                width: 100%;
+            
+                .title {
+                  width: 175px;
+                  font-weight: bold;
+                  text-align: left;
+                  margin: 0;
+                  padding: 5px 0;
+                }
+            
+                .content {
+                  flex: 1;
+                  text-align: left;
+                  margin: 0;
+                }
+              }
+            
+              .user-actions {
+                display: flex;
+                justify-content: flex-start;
+                gap: 10px;
+                margin-top: 20px;
+              }
+            
+              .ant-input {
+                width: 100%;
+              }
+            
+              .ant-input-password {
+                width: 100%;
+              }
+            }          
+            
           }
+          
         }
 
         .user-content-right {
