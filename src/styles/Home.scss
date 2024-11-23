@@ -1,12 +1,5 @@
 .home {
-  .header-home {
-    position: fixed;
-    z-index: 9999;
-    top: 0;
-    left: 0;
-  }
   .content {
-    padding-top: 112px;
     .content-home {
       .background {
         box-sizing: border-box;
@@ -17,6 +10,7 @@
           z-index: 0;
           .slider-banner {
             width: 100%;
+            padding: 0 !important;
 
             .banner {
               width: 100%;

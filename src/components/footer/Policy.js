@@ -1,8 +1,6 @@
-import Header from "@/components/header/Header";
 function Policy() {
   return (
     <>
-      <Header />
       <div
         className="policy"
         style={{

@@ -1,14 +1,13 @@
-import Header from "@/components/header/Header";
-import Footer from "@/components/footer/Footer";
-import { Col, Row, Button, notification } from "antd";
-import Rating from "@/components/rate/Rating";
-import CartQuantity from "@/components/cart/CartQuantity";
-import { useState, useContext } from "react";
-import { CartContext } from "@/store";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Col, Row, Button, notification } from "antd";
 import { useCombineDataContext } from "@/store/CombinedDataContext";
 import { useCart } from "@/hooks";
+import Rating from "@/components/rate/Rating";
+import CartQuantity from "@/components/cart/CartQuantity";
+
 import "@/styles/DetailProduct.scss";
+
 function DetailProduct({ product, userId }) {
   const [value, setValue] = useState(1);
   const navigate = useNavigate();
@@ -62,7 +61,6 @@ function DetailProduct({ product, userId }) {
 
   return (
     <>
-      <Header />
       <div className="detail-product">
         <div className="in4-product">
           <Row>
@@ -129,7 +127,6 @@ function DetailProduct({ product, userId }) {
           </Row>
         </div>
       </div>
-      <Footer />
     </>
   );
 }
