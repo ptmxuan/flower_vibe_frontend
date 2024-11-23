@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Row, Col, Checkbox } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import CartQuantity from "./CartQuantity";
+import { useNavigate } from "react-router-dom";
 
 function CartItem({
   product,
@@ -13,6 +14,9 @@ function CartItem({
   checked,
   onCheck,
 }) {
+
+  const nevigate = useNavigate();
+
   if (!product) {
     return null;
   }
@@ -29,13 +33,15 @@ function CartItem({
           <Checkbox checked={checked} onChange={onCheck} />
         </Col>
         <Col span={8}>
-          <div className="cart-item-img">
-            <img src={product.hinh} alt="product" />
-            <span className="cart-item-info">
-              <h3>{product.ten}</h3>
-              <p>{`${productPriceSale.toLocaleString()} VND`}</p>
-            </span>
-          </div>
+        <div 
+          className="cart-item-img" 
+        >
+          <div className="img" style={{ backgroundImage: `url(${product.hinh})` }}></div>
+          <span className="cart-item-info">
+            <h3 onClick={() => {nevigate(`/san-pham/${product._id}`)}}>{product.ten}</h3>
+            <p>{`${productPriceSale.toLocaleString()} VND`}</p>
+          </span>
+        </div>
         </Col>
         <Col span={4}>
           <div className="cart-item-quantity">

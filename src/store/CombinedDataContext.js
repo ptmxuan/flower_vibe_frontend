@@ -11,15 +11,13 @@ export const CombineDataProvider = ({ children }) => {
   const { products, getProducts } = useProduct();
   const { orders, getAllOrders } = useOrder();
   const { cartItems, getCart } = useCart(); //lấy 2 hàm là State và hàm nào get tất cả
-  const userInfor = useUserContext();
+  const userInfo = useUserContext();
 
-  const userId = userInfor?._id;
+  const userId = userInfo?._id;
 
   useEffect(() => {
-
     const fetchData = async () => {
       try {
-        
         if (!products || products.length === 0) {
           await getProducts();
         }
@@ -43,8 +41,8 @@ export const CombineDataProvider = ({ children }) => {
     };
 
     fetchData();
-  }, []); // Thêm dependencies để kiểm soát việc gọi API
-  
+  }, [cartItems, userId, orders, products]);
+
   //truyền data bên trên vào value để gọi
   const value = {
     products,

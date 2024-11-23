@@ -1,5 +1,6 @@
 .nav {
   display: grid;
+  height: 68px;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
   font-family: "Signika", sans-serif;
@@ -17,40 +18,46 @@
   }
   .nav-center {
     display: flex;
+    flex-direction: row;
+    align-items: center;
     gap: 24px;
     font-weight: 600;
     width: 53vw;
     min-width: 644px;
     justify-content: center;
     font-size: 16px;
+    line-height: 50px;
+    color: rgb(167, 167, 8); 
   
-    & > a {
-      color: rgb(167, 167, 8);
+    & > * {
+      color: inherit; 
       text-decoration: none;
-      cursor: pointer; 
+      cursor: pointer;
     }
   
-    a:hover {
-      color: rgb(243, 192, 5);
+    a {
+      color: inherit; 
+      text-decoration: none;
+      cursor: pointer;
+      
+      &:hover {
+        color: rgb(243, 192, 5);
+      }
     }
-  
-    & > p {
-      margin: 0;
-      padding: 0;
-      color: rgb(167, 167, 8);
-      cursor: pointer; 
-    }
-  
+    
     .ant-dropdown-link {
-      cursor: pointer; 
+      z-index: 1100;
+      color: inherit; 
+      cursor: pointer;
     }
   
     .ant-dropdown-menu-item {
-      cursor: pointer; 
-    }
-  
-    .ant-dropdown-menu-item:hover {
-      background-color: #f0f0f0; 
+      z-index: 1100;
+      color: inherit; 
+      cursor: pointer;
+      &:hover {
+        background-color: #f0f0f0; 
+      }
     }
   }
   

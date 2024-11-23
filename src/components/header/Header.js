@@ -4,10 +4,10 @@ import '@/styles/Header.scss'
 
 function Header() {
   return (
-    <div className="header">
+    <>
       <Info />
       <Nav />
-    </div>
+    </>
   );
 }
 

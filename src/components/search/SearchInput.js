@@ -14,7 +14,6 @@ function SearchInput() {
 
   return (
     <>
-      <Header />
       <div className="search-input">
         <div className="search-bar">
           <Search

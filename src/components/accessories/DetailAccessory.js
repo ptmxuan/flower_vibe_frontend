@@ -39,7 +39,6 @@ function DetailAccessory({ access }) {
   };
   return (
     <>
-      <Header />
       <div className="detail-access">
         <div className="in4-access">
           <Row>
@@ -91,7 +90,6 @@ function DetailAccessory({ access }) {
           </Row>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

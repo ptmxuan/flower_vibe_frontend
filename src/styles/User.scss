@@ -1,184 +1,168 @@
 .user-page {
-  display: flex;
-  flex-direction: column;
-  // .header {
-  //   position: fixed;
-  //   z-index: 9999;
-  //   top: 0;
-  //   left: 0;
-  // }
-
   .ant-layout-content {
-    padding: 120px 4vw 0 4vw;
-    height: 100vh;
+    padding   : 120px 4vw 0 4vw;
     min-height: 600px;
 
     .user {
       .user-content-area {
-        
+
         /* Phần bên trái: user-content-left */
         .user-content-left {
-          border: 1px solid #b7bf44;
-          width: 100%;
+          border       : 1px solid #b7bf44;
+          width        : 100%;
           margin-bottom: 20px;
-          margin-top: 10px;
-          
+          margin-top   : 10px;
+
           .user-info {
             padding-bottom: 20px;
-          
+
             .user-title {
-              border: 1px solid rgb(248, 248, 174);
-              font-family: "Signika", sans-serif;
+              border          : 1px solid rgb(248, 248, 174);
+              font-family     : "Signika", sans-serif;
               background-color: rgb(248, 248, 174);
-              color: black;
-              height: 10vh;
-              display: flex;
-              justify-content: center;
-              align-items: center;
+              color           : black;
+              height          : 10vh;
+              display         : flex;
+              justify-content : center;
+              align-items     : center;
             }
 
             .user-body {
               padding: 0 10px;
-            
+
               :where(.ant-tabs .ant-tabs-tab:hover) .ant-tabs-tab-btn {
-                color: #363636 !important;  
+                color: #363636 !important;
               }
 
               .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
-                color: #363636 !important; 
-                font-weight: 500; 
+                color      : #363636 !important;
+                font-weight: 500;
               }
-             .ant-tabs-ink-bar {
-              position: absolute;
-              background: #000000;
-              pointer-events: none;
+
+              .ant-tabs-ink-bar {
+                position      : absolute;
+                background    : #000000;
+                pointer-events: none;
               }
             }
-            
+
             .user-info {
               padding: 0 10px;
-            
+
               .account-name,
               .user-name,
               .user-phone,
               .user-male {
-                display: flex;
+                display        : flex;
                 justify-content: flex-start;
-                align-items: center;
-                margin: 0 15px 15px 0;
-            
+                align-items    : center;
+                margin         : 0 15px 15px 0;
+
                 .title {
-                  width: 125px;
+                  width      : 125px;
                   font-weight: bold;
-                  text-align: left;
-                  margin: 0;
-                  padding: 5px 0;
+                  text-align : left;
+                  margin     : 0;
+                  padding    : 5px 0;
                 }
-            
+
                 .content {
-                  flex: 1;
+                  flex      : 1;
                   text-align: left;
-                  margin: 0;
+                  margin    : 0;
                 }
               }
-            
+
               .user-actions {
-                display: flex;
+                display        : flex;
                 justify-content: flex-start;
-                gap: 10px;
-                margin-top: 20px;
+                gap            : 10px;
+                margin-top     : 20px;
               }
-            
+
               .ant-input {
                 width: 100%; // Đảm bảo input chiếm hết chiều rộng có sẵn
               }
             }
-            
+
             .change-password {
               padding: 0 10px;
-            
+
               .ant-form-item-explain {
                 margin-top: 5px;
               }
 
               .box {
-                display: flex;
-                flex-direction: row;
-                align-items: flex-start;
+                display        : flex;
+                flex-direction : row;
+                align-items    : flex-start;
                 justify-content: flex-start;
-                margin: 0 10px 10px 0;
-                width: 100%;
-            
+                margin         : 0 10px 10px 0;
+                width          : 100%;
+
                 .title {
-                  width: 175px;
+                  width      : 175px;
                   font-weight: bold;
-                  text-align: left;
-                  margin: 0;
-                  padding: 5px 0;
+                  text-align : left;
+                  margin     : 0;
+                  padding    : 5px 0;
                 }
-            
+
                 .content {
-                  flex: 1;
+                  flex      : 1;
                   text-align: left;
-                  margin: 0;
+                  margin    : 0;
                 }
               }
-            
+
               .user-actions {
-                display: flex;
+                display        : flex;
                 justify-content: flex-start;
-                gap: 10px;
-                margin-top: 20px;
+                gap            : 10px;
+                margin-top     : 20px;
               }
-            
+
               .ant-input {
                 width: 100%;
               }
-            
+
               .ant-input-password {
                 width: 100%;
               }
-            }          
-            
+            }
+
           }
-          
+
         }
 
         .user-content-right {
-          border: 1px solid #b7bf44;
+          border       : 1px solid #b7bf44;
           margin-bottom: 20px;
-          margin-top: 10px;
-          
+          margin-top   : 10px;
+
           .user-history-order {
-            padding-bottom: 20px;
             margin: 0 auto;
-            max-height: 100vh; 
-            overflow-y: auto; 
           }
 
           .title-history-order {
-            border: 1px solid rgb(248, 248, 174);
-            font-family: "Signika", sans-serif;
+            border          : 1px solid rgb(248, 248, 174);
+            font-family     : "Signika", sans-serif;
             background-color: rgb(248, 248, 174);
-            color: black;
-            height: 10vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-
-          .history-order {
-            padding-top: 20px;
+            color           : black;
+            height          : 10vh;
+            display         : flex;
+            justify-content : center;
+            align-items     : center;
           }
 
           .ant-table-tbody {
             max-height: 100vh;
           }
 
-          .ant-table-tbody > tr > td {
-            max-width: 100px;
-            white-space: nowrap; 
-            overflow: hidden;   
+          .ant-table-tbody>tr>td {
+            max-width    : 100px;
+            white-space  : nowrap;
+            overflow     : hidden;
             text-overflow: ellipsis;
           }
         }
@@ -187,8 +171,8 @@
   }
 
   .footer {
-    width: 100%;
-    padding: 10px;
+    width     : 100%;
+    padding   : 10px;
     text-align: center;
   }
 }
