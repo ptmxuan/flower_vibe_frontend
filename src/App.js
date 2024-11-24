@@ -8,6 +8,8 @@ import { Spin } from "antd";
 
 import { CartProvider, CombineDataProvider, UserProvider } from "@/store";
 
+import useFacebookSDK from "./hooks/useFacebookSDK";
+
 import AboutUsPage from "@/pages/AboutUsPage";
 import AccessoryPage from "@/pages/AccessoryPage";
 import AdminPage from "@/pages/AdminPage";
@@ -20,7 +22,7 @@ import HomePage from "@/pages/HomePage";
 import LoginPage from "@/pages/LoginPage";
 import OrderPage from "@/pages/OrderPage";
 import PaymentSuccessPage from "@/pages/PaymentSuccessPage";
-import OrderDetaislPage from "@/pages/OrderDetailsPage";
+import OrderDetailsPage from "@/pages/OrderDetailsPage";
 import PolicyPage from "@/pages/PolicyPage";
 import ProductPage from "@/pages/ProductPage";
 import RegisterPage from "@/pages/RegisterPage";
@@ -58,6 +60,9 @@ function App() {
 }
 
 function AppContent() {
+
+  useFacebookSDK();
+
   return (
     <Routes>
       <Route element={<MainLayout />}>
@@ -72,7 +77,7 @@ function AppContent() {
         <Route path="/don-hang" element={<OrderPage />} />
         <Route path="/phu-kien" element={<AccessoryPage />} />
         <Route path="/phu-kien/:id" element={<DetailAccessoryPage />} />
-        <Route path="/chi-tiet-don-hang" element={<OrderDetaislPage />} />
+        <Route path="/chi-tiet-don-hang" element={<OrderDetailsPage />} />
       </Route>
 
       <Route element={<EmptyLayout />}>

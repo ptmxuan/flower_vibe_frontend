@@ -7,3 +7,4 @@ export * from "./useCart";
 export * from "./useOrder";
 export * from './useProfile'
 export * from './useChangePassword'
+export * from './useFacebookSDK'

@@ -6,6 +6,7 @@ import { useState, useContext } from "react";
 import { CartContext } from "@/store";
 import { useNavigate } from "react-router-dom";
 import "@/styles/DetailAccessory.scss";
+
 function DetailAccessory({ access }) {
   const nevigate = useNavigate();
   const { addToCart, cartItems } = useContext(CartContext);

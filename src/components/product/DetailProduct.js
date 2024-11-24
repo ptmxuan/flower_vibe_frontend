@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Col, Row, Button, notification } from "antd";
 import { useCombineDataContext } from "@/store/CombinedDataContext";
 import { useCart } from "@/hooks";
+
 import Rating from "@/components/rate/Rating";
 import CartQuantity from "@/components/cart/CartQuantity";
+import FacebookComments from "./FacebookComments";
+import FacebookLikeShare from "./FacebookLikeShare";
 
 import "@/styles/DetailProduct.scss";
+
 
 function DetailProduct({ product, userId }) {
   const [value, setValue] = useState(1);
@@ -15,6 +19,10 @@ function DetailProduct({ product, userId }) {
   const { addToCart } = useCart();
   const { getCart, cartItems } = useCombineDataContext();
   const [quantity, setQuantity] = useState(1);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const giaGiam = product.gia - product.gia * product.phantramgiamgia;
   const handleAddToCart = async () => {
@@ -123,6 +131,12 @@ function DetailProduct({ product, userId }) {
                   Bạn sẽ nhận được ảnh hoàn thiện trước khi chúng tôi giao hoa.
                 </p>
               </div>
+            </Col>
+            <Col span={24}>
+              <FacebookLikeShare url={`http://localhost:3000`}/>
+            </Col>
+            <Col span={24}>
+              <FacebookComments url={`http://localhost:3000`} />
             </Col>
           </Row>
         </div>
