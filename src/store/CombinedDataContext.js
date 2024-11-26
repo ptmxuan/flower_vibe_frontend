@@ -7,12 +7,11 @@ const CombineDataContext = createContext();
 
 // Tạo một provider component
 export const CombineDataProvider = ({ children }) => {
-  const [quantities, setQuantities] = useState([]);
+  const [quantities, setQuantities] = useState({});  // Chuyển từ mảng thành đối tượng
   const { products, getProducts } = useProduct();
   const { orders, getAllOrders } = useOrder();
   const { cartItems, getCart } = useCart(); //lấy 2 hàm là State và hàm nào get tất cả
   const userInfo = useUserContext();
-
   const userId = userInfo?._id;
 
   useEffect(() => {

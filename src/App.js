@@ -1,8 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Suspense } from "react";
 import { Spin } from "antd";
 
@@ -23,6 +19,7 @@ import LoginPage from "@/pages/LoginPage";
 import OrderPage from "@/pages/OrderPage";
 import PaymentSuccessPage from "@/pages/PaymentSuccessPage";
 import OrderDetailsPage from "@/pages/OrderDetailsPage";
+import ManagerDesign from "@/pages/ManagerDesign";
 import PolicyPage from "@/pages/PolicyPage";
 import ProductPage from "@/pages/ProductPage";
 import RegisterPage from "@/pages/RegisterPage";
@@ -60,7 +57,6 @@ function App() {
 }
 
 function AppContent() {
-
   useFacebookSDK();
 
   return (
@@ -77,7 +73,8 @@ function AppContent() {
         <Route path="/don-hang" element={<OrderPage />} />
         <Route path="/phu-kien" element={<AccessoryPage />} />
         <Route path="/phu-kien/:id" element={<DetailAccessoryPage />} />
-        <Route path="/chi-tiet-don-hang" element={<OrderDetailsPage />} />
+        <Route path="/chi-tiet-don-hang/:id" element={<OrderDetailsPage />} />
+        <Route path="/quan-ly-thiet-ke" element={<ManagerDesign />} />
       </Route>
 
       <Route element={<EmptyLayout />}>
@@ -87,7 +84,7 @@ function AppContent() {
         <Route path="/thiet-ke" element={<DesignPage />} />
         <Route path="/vnpay_return" element={<PaymentSuccessPage />} />
       </Route>
-      <Route path="*" element={<PageNotFound/>} />
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 }

@@ -3,4 +3,5 @@ export const API_END_POINT = {
   product: "/api/products",
   cart: "/api/cart",
   order: "/api/order",
+  design: "/api/designs"
 };

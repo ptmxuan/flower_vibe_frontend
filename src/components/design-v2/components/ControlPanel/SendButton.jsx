@@ -1,14 +1,28 @@
-import { Button, Tooltip } from "antd";
+import { Button, notification, Tooltip } from "antd";
 import html2canvas from "html2canvas";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 import { AppContext } from "../../AppContext";
 
 import "./SendButton.sass";
 import { UploadOutlined, UpSquareOutlined } from "@ant-design/icons";
+import { useDesign } from "@/hooks/useDesign";
+import { useUserContext } from "@/store/UserContext";
+import { useCart } from "@/hooks/useCart";
+import { useCombineDataContext } from "@/store/CombinedDataContext";
 
-export const SendButton = () => {
-  const { setCurrentIngred } = useContext(AppContext);
+export const SendButton = ({ nameDesign }) => {
+  const { setCurrentIngred, ingreds } = useContext(AppContext);
+
+  const userInfo = useUserContext();
+
+  const { addToCart } = useCart();
+
+  const { getCart } = useCombineDataContext();
+
+  const userId = userInfo?._id;
+
+  const { createDesign, loading, error, data } = useDesign();
 
   // Ẩn các phần tử có className cụ thể
   const hideElementsWithClass = (classNameToHide) => {
@@ -116,15 +130,86 @@ export const SendButton = () => {
     resultWindow.document.close();
   };
 
-  // Hàm để gửi API
   const sendImageToAPI = async (imageData) => {
-    // Ví dụ logic gửi API:
-    // await fetch("https://api.example.com/upload", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ image: imageData }),
-    // });
+    function resizeImage(imageData, maxWidth = 2048, maxHeight = 1080) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = imageData;
+
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+
+          const aspectRatio = img.width / img.height;
+          if (img.width > img.height) {
+            canvas.width = maxWidth;
+            canvas.height = maxWidth / aspectRatio;
+          } else {
+            canvas.height = maxHeight;
+            canvas.width = maxHeight * aspectRatio;
+          }
+
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+          const resizedImage = canvas.toDataURL("image/jpeg");
+          resolve(resizedImage);
+        };
+
+        img.onerror = (error) => reject(error);
+      });
+    }
+
+    const materials = [
+      { id: "672b792681aa3dd73bfb7d3d", name: "Hoa hồng đỏ", quantity: 5 },
+      { id: "672b792681aa3dd73bfb7d3e", name: "Hoa cẩm tú", quantity: 3 },
+    ];
+
+    const resizedImageData = await resizeImage(imageData);
+    await createDesign(
+      userId,
+      nameDesign,
+      resizedImageData,
+      materials,
+      1200000
+    );
   };
+
+  useEffect(() => {
+    if (error) {
+      notification.error({
+        message: "Tạo thiết kế thành công",
+        description: "Vui lòng kiểm tra và thử lại",
+        placement: "bottomRight",
+      });
+    }
+    if (data) {
+      notification.success({
+        message: "Tạo thiết kế thành công",
+        description: (
+          <div>
+            Tạo thiết kế thành công
+            <Button
+              type="primary"
+              size="middle"
+              style={{ marginLeft: 8, marginTop: 5 }}
+              onClick={() => {
+                addToCart(userId, "design", data.design._id, 1);
+                getCart(userId);
+                notification.success({
+                  message: "Thêm vào giỏ hàng thành công",
+                  description: "Thêm vào giỏ hàng thành công",
+                  placement: "bottomRight",
+                });
+              }}
+            >
+              Thêm thiết kế này vào giỏ hàng
+            </Button>
+          </div>
+        ),
+        placement: "bottomRight",
+      });
+    }
+  }, [error, data]);
 
   // Chụp ảnh màn hình
   const handleScreenshot = async () => {
@@ -168,8 +253,7 @@ export const SendButton = () => {
               processedImages[2],
               async (finalImg) => {
                 // Hiển thị ảnh
-                displayResultImage(finalImg);
-
+                // displayResultImage(finalImg);
                 // Gửi API
                 await sendImageToAPI(finalImg);
               }
@@ -182,8 +266,14 @@ export const SendButton = () => {
 
   return (
     <div className="send_button">
-       <Tooltip className='send_button__tooltip' placement="bottom" >
+      <Tooltip
+        className="send_button__tooltip"
+        placement="bottom"
+        title={ingreds.length === 0 && "Vui lòng thêm ít nhất 1 sản phẩm"}
+      >
         <Button
+          loading={loading}
+          disabled={loading || ingreds.length === 0}
           icon={<UploadOutlined />}
           className="send_button__button"
           size="large"
@@ -193,9 +283,9 @@ export const SendButton = () => {
             handleScreenshot();
           }}
         >
-          Gửi bản thiết kế
+          {loading ? "Đang gửi" : "Tạo thiết kế"}
         </Button>
-       </Tooltip>
+      </Tooltip>
     </div>
   );
 };

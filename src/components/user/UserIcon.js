@@ -23,6 +23,10 @@ function UserIcon() {
         key: "Thông tin tài khoản",
       },
       {
+        label: <Link to="/quan-ly-thiet-ke">Thiết kế của tôi</Link>, 
+        key: "Thiết kế của tôi",
+      },
+      {
         label: "Đăng xuất",
         key: "Đăng xuất",
         onClick: handleLogout,

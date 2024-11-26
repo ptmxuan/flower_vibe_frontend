@@ -1,0 +1,42 @@
+.design-details-page {
+  font-family: "Signika", sans-serif;
+  border: 2px solid #b7bf44;
+  margin: 60px 200px;
+  border-radius: 4px;
+
+  .design-details-title {
+    font-family: "Signika", sans-serif;
+    color: #b7bf44;
+
+    .design-details-table {
+      .ant-btn {
+        &.ant-btn-primary {
+          background-color: #98a027;
+          border-color: #98a027; 
+          color: white;  
+          margin-bottom: 10px;
+          width: 100%;  
+          &:hover {
+            background-color: #b49c1c;  
+            border-color: #b49c1c;
+          }
+        }
+
+        &.ant-btn-danger {
+          background-color: #e74c3c;  
+          border-color: #e74c3c;  
+          color: white;  
+          &:hover {
+            background-color: #c0392b; 
+            border-color: #c0392b;
+          }
+        }
+      }
+    }
+
+    & > h1 {
+      margin-bottom: 20px;
+      color: #2d2d2d;
+    }
+  }
+}

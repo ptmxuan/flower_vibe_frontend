@@ -25,6 +25,17 @@
               font-size: 30px;
               margin:10px;
             }
+
+            .checked {
+              display: flex;
+              flex-direction: row;
+              justify-content: flex-start;
+              width: 100%;
+              margin-left: 22px;
+              padding: 10px 0;
+              font-weight: bold;
+            }
+
             .cart-item {
               margin-bottom:10px;
               .ant-row {

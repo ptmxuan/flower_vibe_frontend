@@ -5,7 +5,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useUserContext } from "@/store/UserContext";
 import { useCombineDataContext } from "@/store/CombinedDataContext";
+
+import { Divider } from "antd";
+
 function BillOfOrder({
+  isValid,
   cartItems,
   userName,
   address,
@@ -14,9 +18,10 @@ function BillOfOrder({
   selectedTime,
   totalPrice,
   cartProducts,
+  cartDesigns,
 }) {
-  const navigate = useNavigate();
   const [selectedOption, setSelectedOption] = useState("");
+
   const { createOrder } = useOrder();
   const { getCart } = useCombineDataContext();
   const userInfo = useUserContext();
@@ -34,17 +39,35 @@ function BillOfOrder({
     };
     const pricePromises = cartItems.map(async (item) => {
       try {
-        const response = await axios.get(
-          `http://localhost:2512/api/products/${item.productId}`
-        );
+        if (item.itemType === "product") {
+          const response = await axios.get(
+            `http://localhost:2512/api/products/${item.productId}`
+          );
 
-        // Sao chép đối tượng và loại bỏ trường `_id`
-        const { gia, productId, quantity } = {
-          ...item,
-          gia: response.data.gia,
-        };
+          // Sao chép đối tượng và loại bỏ trường `_id`
+          const { gia, itemType, productId, quantity } = {
+            ...item,
+            gia: response.data.gia,
+            itemType: "product",
+          };
+          return { gia, itemType, productId, quantity };
+        } else {
+          // Tìm thiết kế trong mảng cartDesigns theo productId
+          const design = cartDesigns.find(
+            (design) => design._id === item.productId
+          );
 
-        return { gia, productId, quantity }; // Trả về đối tượng không có `_id`
+          if (!design) {
+            throw new Error(`Không tìm thấy thiết kế với ID ${item.productId}`);
+          }
+
+          const { gia, itemType, productId, quantity } = {
+            ...item,
+            gia: design.designPrice, // Lấy giá từ trường designPrice
+            itemType: "design",
+          };
+          return { gia, itemType, productId, quantity };
+        }
       } catch (error) {
         notification.error({
           message: `Lỗi khi lấy giá cho sản phẩm ${item.productId}`,
@@ -59,13 +82,14 @@ function BillOfOrder({
     try {
       const cartItemsWithPrices = await Promise.all(pricePromises);
       console.log("cartItemsWithPrices", cartItemsWithPrices);
-      await createOrder({
+      let response = await createOrder({
         userId: userId,
         items: cartItemsWithPrices,
         customer: customer,
         orderDate: formattedDate,
         deliveryTime: selectedTime,
       });
+
       notification.success({
         message: "Đơn hàng thành công",
         description: "Đơn hàng đã được tạo thành công!",
@@ -167,34 +191,66 @@ function BillOfOrder({
             cartItems.find((cart) => cart.productId === item._id)?.quantity ||
             1;
           return (
-            <div key={item.id}>
-              <div className="ten-sp-mua">
-                <h3>Tên sản phẩm: </h3>
-                <p>{item.ten}</p>
+            <>
+              <div key={item.id} className="san-pham">
+                <div className="ten-sp-mua">
+                  <h3>Tên sản phẩm: </h3>
+                  <p>{item.ten}</p>
+                </div>
+                <div className="gia-sp">
+                  <h3>Đơn giá: </h3>
+                  <p>
+                    {item.phantramgiamgia > 0
+                      ? item.gia - item.gia * item.phantramgiamgia
+                      : item.gia}{" "}
+                    VNĐ
+                  </p>
+                </div>
+                <div className="so-luong">
+                  <h3>Số lượng: </h3>
+                  <p>{quantityProduct}</p>
+                </div>
               </div>
-              <div className="gia-sp">
-                <h3>Giá: </h3>
-                <p>
-                  {item.phantramgiamgia > 0
-                    ? item.gia - item.gia * item.phantramgiamgia
-                    : item.gia}
-                </p>
+              <Divider style={{ margin: "2px 0" }} />
+            </>
+          );
+        })}
+        {cartDesigns?.map((item) => {
+          const quantityProduct =
+            cartItems.find((cart) => cart.productId === item._id)?.quantity ||
+            1;
+          return (
+            <>
+              <div key={item.id} className="san-pham">
+                <div className="ten-sp-mua">
+                  <h3>Tên sản phẩm: </h3>
+                  <p>{item.name}</p>
+                </div>
+                <div className="gia-sp">
+                  <h3>Đơn giá: </h3>
+                  <p>{item.designPrice} VNĐ</p>
+                </div>
+                <div className="so-luong">
+                  <h3>Số lượng: </h3>
+                  <p>{quantityProduct}</p>
+                </div>
               </div>
-              <div className="so-luong">
-                <h3>Số lượng: </h3>
-                <p>{quantityProduct}</p>
-              </div>
-            </div>
+              <Divider style={{ margin: "2px 0" }} />
+            </>
           );
         })}
         <div className="tong-gia">
-          <h3>Tổng giá: </h3>
-          <p>{totalPrice}</p>
+          <h3>Thành tiền: </h3>
+          <h3>{totalPrice} VNĐ</h3>
         </div>
         <div className="xac-nhan">
-          <Form.Item>
-            <Button onClick={handleSubmitOnline}>Thanh Toán</Button>
-          </Form.Item>
+          {isValid ? (
+            <Form.Item>
+              <Button onClick={handleSubmitOnline}>Thanh Toán</Button>
+            </Form.Item>
+          ) : (
+            <Button disabled>Vui lòng điền đủ thông tin đơn hàng</Button>
+          )}
         </div>
       </div>
     </div>

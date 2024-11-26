@@ -2,10 +2,12 @@ import { Table, Tooltip } from "antd";
 import { useOrder } from "@/hooks/useOrder";
 import { useUserContext } from "@/store/UserContext";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function UserHistoryOder() {
   const userInfo = useUserContext();
   const { orders, getAllOrders } = useOrder();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (userInfo) {
@@ -18,7 +20,11 @@ function UserHistoryOder() {
       title: "Mã Đơn Hàng",
       dataIndex: "_id",
       key: "_id",
-      render: (text) => <Tooltip title={text}><span>{text}</span></Tooltip>,
+      render: (text) => (
+        <Tooltip title={text}>
+          <span>{text}</span>
+        </Tooltip>
+      ),
     },
     {
       title: "Địa Chỉ",
@@ -35,8 +41,16 @@ function UserHistoryOder() {
       dataIndex: "items",
       key: "items",
       render: (items) => (
-        <Tooltip title={items.map((item) => `${item.quantity} x ${item.productId}`).join(", ")}>
-          <span>{items.map((item) => `${item.quantity} x ${item.productId}`).join(", ")}</span>
+        <Tooltip
+          title={items
+            .map((item) => `${item.quantity} x ${item.productId}`)
+            .join(", ")}
+        >
+          <span>
+            {items
+              .map((item) => `${item.quantity} x ${item.productId}`)
+              .join(", ")}
+          </span>
         </Tooltip>
       ),
     },
@@ -65,7 +79,7 @@ function UserHistoryOder() {
       dataIndex: "deliveryTime",
       key: "deliveryTime",
       render: (deliveryTime) => (
-        <Tooltip className="" title={deliveryTime}>
+        <Tooltip title={deliveryTime}>
           <span>{deliveryTime}</span>
         </Tooltip>
       ),
@@ -84,6 +98,12 @@ function UserHistoryOder() {
             dataSource={orders}
             rowKey="_id"
             pagination={false}
+            onRow={(record) => ({
+              onClick: () =>
+                navigate(`/chi-tiet-don-hang/${record._id}`, {
+                  state: { order: record, showHomeButton: false },
+                }),
+            })}
           />
         ) : (
           <p>Không có đơn hàng nào.</p>

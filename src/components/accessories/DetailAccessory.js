@@ -1,5 +1,3 @@
-import Header from "@/components/header/Header";
-import Footer from "@/components/footer/Footer";
 import { Col, Row, Button, notification } from "antd";
 import CartQuantity from "@/components/cart/CartQuantity";
 import { useState, useContext } from "react";
