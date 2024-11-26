@@ -11,7 +11,6 @@ import FacebookLikeShare from "./FacebookLikeShare";
 
 import "@/styles/DetailProduct.scss";
 
-
 function DetailProduct({ product, userId }) {
   const [value, setValue] = useState(1);
   const navigate = useNavigate();
@@ -27,7 +26,7 @@ function DetailProduct({ product, userId }) {
   const giaGiam = product.gia - product.gia * product.phantramgiamgia;
   const handleAddToCart = async () => {
     if (quantity > 0 && quantity <= product.quantity) {
-      await addToCart(userId, product._id, quantity);
+      await addToCart(userId, "product", product._id, quantity);
       await getCart(userId);
       notification.success({
         message: "Thành công",
@@ -46,7 +45,7 @@ function DetailProduct({ product, userId }) {
     if (quantity > 0 && quantity <= product.quantity) {
       navigate("/don-hang", {
         state: {
-          cartItems: [
+          cartItemDefaults: [
             {
               productId: product._id,
               quantity: quantity,
@@ -133,7 +132,7 @@ function DetailProduct({ product, userId }) {
               </div>
             </Col>
             <Col span={24}>
-              <FacebookLikeShare url={`http://localhost:3000`}/>
+              <FacebookLikeShare url={`http://localhost:3000`} />
             </Col>
             <Col span={24}>
               <FacebookComments url={`http://localhost:3000`} />

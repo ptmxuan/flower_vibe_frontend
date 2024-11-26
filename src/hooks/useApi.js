@@ -35,7 +35,10 @@ export const useApi = (endpointUrl) => {
     // await delay(1000);
     return axiosGetData_
       .get((customEndpoint ? customEndpoint : endpointUrl) + query)
-      .then((response) => setData(response.data))
+      .then((response) => {
+        setData(response.data);
+        return response.data;
+      })
       .catch((error) => setError(error))
       .finally(() => setLoading(false));
   };

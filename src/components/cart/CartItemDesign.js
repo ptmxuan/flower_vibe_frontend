@@ -5,7 +5,7 @@ import { DeleteOutlined } from "@ant-design/icons";
 
 import CartQuantity from "./CartQuantity";
 
-function CartItem({
+function CartItemDesign({
   product,
   value,
   setValue,
@@ -23,12 +23,6 @@ function CartItem({
     return null;
   }
 
-  const productPriceSale = product.gia - product.gia * product.phantramgiamgia;
-  const productTotal =
-    product.phantramgiamgia > 0
-      ? productPriceSale * value
-      : product.gia * value;
-
   return (
     <div className="cart-item">
       <Row gutter={16}>
@@ -39,10 +33,10 @@ function CartItem({
         <div 
           className="cart-item-img" 
         >
-          <div className="img" style={{ backgroundImage: `url(${product.hinh})` }}></div>
+          <div className="img" style={{ backgroundImage: `url(${product.image})` }}></div>
           <span className="cart-item-info">
-            <h3 onClick={() => {nevigate(`/san-pham/${product._id}`)}}>{product.ten}</h3>
-            <p>{`${productPriceSale.toLocaleString()} VND`}</p>
+            <h3 onClick={() => {nevigate(`/san-pham/${product._id}`)}}>{product.name}</h3>
+            <p>{`${product?.designPrice.toLocaleString()} VND`}</p>
           </span>
         </div>
         </Col>
@@ -59,7 +53,7 @@ function CartItem({
         </Col>
         <Col span={6}>
           <div className="cart-item-price">
-            <h3>{`${productTotal.toLocaleString()} VND`}</h3>
+            <h3>{`${product?.designPrice.toLocaleString()} VND`}</h3>
           </div>
         </Col>
         <Col span={4}>
@@ -76,4 +70,4 @@ function CartItem({
   );
 }
 
-export default CartItem;
+export default CartItemDesign;

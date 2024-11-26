@@ -24,9 +24,10 @@ export const useCart = () => {
   };
 
   // Thêm sản phẩm vào giỏ hàng
-  const addToCart = async (userId, productId, quantity) => {
+  const addToCart = async (userId, itemType = "product", productId, quantity) => {
+    console.log('itemType',itemType);
     try {
-      await post({ userId, productId, quantity }, `${END_POINT}/addToCart`); //api/cart/addToCart
+      await post({ userId, itemType, productId, quantity }, `${END_POINT}/addToCart`); //api/cart/addToCart
 
       setCartItems((prevItems) => {
         const newItem = data;
