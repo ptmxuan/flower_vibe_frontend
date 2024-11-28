@@ -39,11 +39,10 @@ function BillOfOrder({
     };
     const pricePromises = cartItems.map(async (item) => {
       try {
-        if (item.itemType === "product") {
+        if (cartProducts.some((product) => product._id === item.productId)) {
           const response = await axios.get(
             `http://localhost:2512/api/products/${item.productId}`
           );
-
           // Sao chép đối tượng và loại bỏ trường `_id`
           const { gia, itemType, productId, quantity } = {
             ...item,
@@ -51,7 +50,8 @@ function BillOfOrder({
             itemType: "product",
           };
           return { gia, itemType, productId, quantity };
-        } else {
+        }
+        if (cartDesigns.some((product) => product._id === item.productId)) {
           // Tìm thiết kế trong mảng cartDesigns theo productId
           const design = cartDesigns.find(
             (design) => design._id === item.productId
