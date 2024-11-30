@@ -2,11 +2,10 @@ import { useApi } from "./useApi";
 import { API_END_POINT } from "../constants/api-url";
 import { useState, useEffect } from "react";
 
-const END_POINT_URL = API_END_POINT.product;
-
 export const useProduct = () => {
-  const { loading, data, error, get, post, put, patch, del } =
-    useApi(END_POINT_URL);
+  const { loading, data, error, get, post, put, patch, del } = useApi(
+    API_END_POINT.product
+  );
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -15,12 +14,16 @@ export const useProduct = () => {
     }
   }, [data]);
 
+  useEffect(() => {
+    getProducts();
+  }, []);
+
   // Function to get all products
   // Function to get all products
   const getProducts = async () => {
     try {
       const result = await get();
-     
+
       return result;
     } catch (err) {
       console.error("Error fetching products:", err);
@@ -48,7 +51,7 @@ export const useProduct = () => {
   // Function to update a product by ID
   const updateProductById = async (id, productData) => {
     try {
-      return await put(productData, `/${id}`);
+      return await put(productData, `${API_END_POINT.product}/${id}`);
     } catch (err) {
       console.error(`Error updating product with ID ${id}:`, err);
     }
@@ -57,7 +60,7 @@ export const useProduct = () => {
   // Function to delete a product by ID
   const deleteProductById = async (id) => {
     try {
-      return await del(null, `/${id}`);
+      return await del({}, `${API_END_POINT.product}/${id}`);
     } catch (err) {
       console.error(`Error deleting product with ID ${id}:`, err);
     }

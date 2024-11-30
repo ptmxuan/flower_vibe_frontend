@@ -9,6 +9,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AddProduct from "../manage/products/AddProduct";
 import StatisticProduct from "../manage/statistic/StatisticProduct";
+import ManageChuDePage from "@/pages/ManageChuDe";
+import ManageNhaCungCapPage from "@/pages/ManageNhaCungCap";
+import ManageNhapHangPage from "@/pages/ManageNhaphang";
 // import { useAuth } from "../../hooks/useAuth";
 
 function Admin() {
@@ -34,12 +37,21 @@ function Admin() {
       content = <OrderManage />;
       break;
     case 2:
-      content = <ManageProductPage />;
+      content = <ManageChuDePage />;
       break;
     case 3:
-      content = <StatisticProduct />;
+      content = <ManageProductPage />;
       break;
     case 4:
+      content = <ManageNhaCungCapPage />;
+      break;
+    case 5:
+      content = <ManageNhapHangPage />;
+      break;
+    case 6:
+      content = <StatisticProduct />;
+      break;
+    case 7:
       content = <AddProduct />;
       break;
 
