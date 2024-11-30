@@ -1,9 +1,9 @@
-import ProductsBody from "@/components/manage/products/ProductsBody";
+import ChuDeBody from "@/components/manage/chude/ChuDe";
 
 export default function ManageChuDePage() {
   return (
     <div className="ManageProductPage">
-      <ProductsBody />
+      <ChuDeBody />
     </div>
   );
 }

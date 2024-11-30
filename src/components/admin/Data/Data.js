@@ -11,7 +11,10 @@ import {
 // Analytics Cards imports
 import { UilUsdSquare, UilMoneyWithdrawal } from "@iconscout/react-unicons";
 // import { keyboard } from "@testing-library/user-event/dist/keyboard";
-
+import { UilHouseUser } from "@iconscout/react-unicons";
+import { UilFlower } from "@iconscout/react-unicons";
+import { UilFileAlt } from "@iconscout/react-unicons";
+import { UilBox } from "@iconscout/react-unicons";
 // Recent Card Imports
 import img1 from "../imgs/img1.png";
 import img2 from "../imgs/img2.png";
@@ -32,9 +35,20 @@ export const SidebarData = [
   //   heading: "Customers",
   // },
   {
-    icon: UilPackage,
+    icon: UilFileAlt,
+    heading: "Quản lý chủ đề",
+  },
+  {
+    icon: UilFlower,
     heading: "Quản lý sản phẩm",
-    dropdown: ["Thêm sản phẩm"],
+  },
+  {
+    icon: UilHouseUser,
+    heading: "Quản lý nhà cung cấp",
+  },
+  {
+    icon: UilBox,
+    heading: "Quản lý nhập hàng",
   },
   {
     icon: UilChart,

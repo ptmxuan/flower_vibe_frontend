@@ -65,7 +65,6 @@ function DetailProduct({ product, userId }) {
       });
     }
   };
-
   return (
     <>
       <div className="detail-product">
@@ -102,21 +101,34 @@ function DetailProduct({ product, userId }) {
               <div className="in4">
                 <p>Hình dáng: {product.hinhdang}</p>
                 <p>Màu sắc: {product.mau}</p>
-                <p>Chủ đề: {product.chude}</p>
+                <p>
+                  Chủ đề:{" "}
+                  {product?.chuDes?.length > 0
+                    ? product.chuDes.map((item) => item.ten).join(", ")
+                    : "Không có chủ đề"}
+                </p>
               </div>
 
               <div className="so-luong-them-vao-gio-hang">
-                <CartQuantity
-                  product={product}
-                  value={quantity}
-                  setValue={setQuantity}
-                  initialValue={1}
-                />
-                <Button onClick={handleAddToCart}>THÊM VÀO GIỎ HÀNG</Button>
+                {quantity === 0 ? (
+                  <p style={{ color: "red" }}>Sản phẩm hết hàng</p>
+                ) : (
+                  <>
+                    <CartQuantity
+                      product={product}
+                      value={quantity}
+                      setValue={setQuantity}
+                      initialValue={1}
+                    />
+                    <Button onClick={handleAddToCart}>THÊM VÀO GIỎ HÀNG</Button>
+                  </>
+                )}
               </div>
-              <div className="mua-hang">
-                <Button onClick={handleBuyNow}>MUA NGAY </Button>
-              </div>
+              {quantity > 0 && (
+                <div className="mua-hang">
+                  <Button onClick={handleBuyNow}>MUA NGAY</Button>
+                </div>
+              )}
               <div className="mo-ta-sp">
                 <h3>Mô tả: </h3>
                 <span>{product.detailDescription}</span>

@@ -91,7 +91,7 @@ export default function AddProduct() {
             onChange={(e) => setnameValue(e.target.value)}
           ></input>
           <label className="label form-product" htmlFor="typeofproduct">
-            Loại sản phẩm
+            Loại sản phẩm 8
           </label>
 
           <select
