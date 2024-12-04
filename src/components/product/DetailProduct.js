@@ -95,7 +95,7 @@ function DetailProduct({ product, userId }) {
                 )}
               </div>
               <div className="danh-gia">
-                <Rating rating={product.rate} />
+                <Rating rating={product.rate} allowEdit={true} />
                 <span>({product.rate})</span>
               </div>
               <div className="in4">

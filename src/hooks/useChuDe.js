@@ -27,7 +27,6 @@ export const useChuDe = () => {
       console.error("Error fetching ChuDe:", err);
     }
   };
-
   // Function to get a single ChuDe by ID
   const getChuDeById = async (id) => {
     try {

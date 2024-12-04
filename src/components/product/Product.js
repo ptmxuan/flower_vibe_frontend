@@ -18,9 +18,9 @@ function Product({ selectSider }) {
     gia: [],
     hinhdang: [],
   });
-  const [searchQuery, setSearchQuery] = useState(""); 
-  const [filteredProducts, setFilteredProducts] = useState(products); 
-
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState(products);
+  console.log("products", products);
   // useEffect để đọc query params và cập nhật selectedFilters
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -53,7 +53,9 @@ function Product({ selectSider }) {
   // Hàm để xóa một filter khi người dùng nhấp vào tag
   const removeFilter = (type, value) => {
     const updatedFilters = { ...selectedFilters };
-    updatedFilters[type] = updatedFilters[type].filter((item) => item !== value);
+    updatedFilters[type] = updatedFilters[type].filter(
+      (item) => item !== value
+    );
     setSelectedFilters(updatedFilters);
 
     // Cập nhật lại query string trong URL
@@ -70,22 +72,48 @@ function Product({ selectSider }) {
     return products.filter((product) => {
       const { chude, mausac, gia, hinhdang } = selectedFilters;
 
-      const matchesChude = chude.length === 0 || chude.some((item) => product.chude.includes(item));
-      const matchesMausac = mausac.length === 0 || mausac.some((item) => product.mau === item);
-      const matchesGia = gia.length === 0 || gia.some((item) => {
-        const productPrice = product.gia;
-        if (item === "duoi-200") return productPrice < 200000;
-        if (item === "200-500") return productPrice >= 200000 && productPrice <= 500000;
-        if (item === "500-700") return productPrice >= 500000 && productPrice <= 700000;
-        if (item === "700-1000") return productPrice >= 700000 && productPrice <= 1000000;
-        if (item === "tren-1000") return productPrice > 1000000;
-        return false;
-      });
-      const matchesHinhdang = hinhdang.length === 0 || hinhdang.some((item) => product.hinhdang === item);
+      console.log("chude", chude);
+      console.log("product.chuDes", product?.chuDes);
 
-      const matchesSearch = searchQuery.length === 0 || product.ten.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesChude =
+        chude.length === 0 ||
+        chude.some((chudeItem) =>
+          product?.chuDes?.some(
+            (productChude) => productChude.ten === chudeItem
+          )
+        );
 
-      return matchesChude && matchesMausac && matchesGia && matchesHinhdang && matchesSearch;
+      const matchesMausac =
+        mausac.length === 0 || mausac.some((item) => product.mau === item);
+      const matchesGia =
+        gia.length === 0 ||
+        gia.some((item) => {
+          const productPrice = product.gia;
+          if (item === "duoi-200") return productPrice < 200000;
+          if (item === "200-500")
+            return productPrice >= 200000 && productPrice <= 500000;
+          if (item === "500-700")
+            return productPrice >= 500000 && productPrice <= 700000;
+          if (item === "700-1000")
+            return productPrice >= 700000 && productPrice <= 1000000;
+          if (item === "tren-1000") return productPrice > 1000000;
+          return false;
+        });
+      const matchesHinhdang =
+        hinhdang.length === 0 ||
+        hinhdang.some((item) => product.hinhdang === item);
+
+      const matchesSearch =
+        searchQuery.length === 0 ||
+        product.ten.toLowerCase().includes(searchQuery.toLowerCase());
+
+      return (
+        matchesChude &&
+        matchesMausac &&
+        matchesGia &&
+        matchesHinhdang &&
+        matchesSearch
+      );
     });
   };
 
@@ -115,7 +143,9 @@ function Product({ selectSider }) {
   };
 
   // Kiểm tra nếu có bất kỳ filter nào được chọn
-  const hasFilters = Object.values(selectedFilters).some((filterArray) => filterArray.length > 0);
+  const hasFilters = Object.values(selectedFilters).some(
+    (filterArray) => filterArray.length > 0
+  );
 
   return (
     <div className="product">
@@ -133,24 +163,27 @@ function Product({ selectSider }) {
             <FunnelPlotOutlined />
             <p>Lọc theo:</p>
           </div>
-          {Object.entries(selectedFilters).map(([filterType, values]) => (
-            values.length > 0 && (
-              <div key={filterType} className="filter-tags">
-                {values.map((value) => (
-                  <Tag
-                    key={value}
-                    color="blue"
-                    closable
-                    onClose={() => removeFilter(filterType, value)}
-                  >
-                    {value}
-                  </Tag>
-                ))}
-              </div>
-            )
-          ))}
+          {Object.entries(selectedFilters).map(
+            ([filterType, values]) =>
+              values.length > 0 && (
+                <div key={filterType} className="filter-tags">
+                  {values.map((value) => (
+                    <Tag
+                      key={value}
+                      color="blue"
+                      closable
+                      onClose={() => removeFilter(filterType, value)}
+                    >
+                      {value}
+                    </Tag>
+                  ))}
+                </div>
+              )
+          )}
           <div className="filter-tags">
-            <Button type="text" onClick={deleteAll}>Xóa tất cả</Button>
+            <Button type="text" onClick={deleteAll}>
+              Xóa tất cả
+            </Button>
           </div>
         </div>
       )}
@@ -164,7 +197,9 @@ function Product({ selectSider }) {
               </Col>
             ))
           ) : (
-            <p className="title">Rất tiếc sản phẩm bạn tìm kiếm không tồn tại</p>
+            <p className="title">
+              Rất tiếc sản phẩm bạn tìm kiếm không tồn tại
+            </p>
           )}
         </Row>
       </div>

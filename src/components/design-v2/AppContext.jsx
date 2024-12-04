@@ -1,32 +1,68 @@
-import { createContext, useState } from 'react';
-import { ReactComponent as HoaHong } from './media/hoahong.svg';
-import { ReactComponent as HoaHongHong } from './media/hoahonghong.svg';
-import { ReactComponent as HoaMauDon } from './media/hoamaudon.svg';
+import { createContext, useEffect, useState } from "react";
+
+// SVG Thiết kế
+import { ReactComponent as HoaHong } from "./media/hoahong.svg";
+import { ReactComponent as HoaHongHong } from "./media/hoahonghong.svg";
+import { ReactComponent as HoaMauDon } from "./media/hoamaudon.svg";
+
+import { useChuDeWithName } from "@/hooks/useChuDeWithName";
 
 export const AppContext = createContext(null);
 
 const AppProvider = ({ children }) => {
+  const { getChuDesbyName, chuDesWithName } = useChuDeWithName();
+
+  const [finalCost, setFinalCost] = useState(0);
   const [ingreds, setIngreds] = useState([]);
   const [currentIngred, setCurrentIngred] = useState(null);
-  const [addButtonList, setAddButtonList] = useState({
-    'Hoa hồng': [
-      'Hoa hồng đỏ',
-      'Hoa mẫu đơn',
-      'Hoa hồng',
-    ],
-    'Hoa hồng 2': [
-      'Hoa hồng đỏ',
-      'Hoa mẫu đơn',
-      'Hoa hồng',
-    ],
-  });
+  const [addButtonList, setAddButtonList] = useState({});
+  const [loading, setLoading] = useState(true);
 
   const [images, setImages] = useState({
-    'Hoa hồng đỏ': HoaHong,
-    'Hoa mẫu đơn': HoaMauDon,
-    'Hoa hồng': HoaHongHong,
-    // 'red rose': [HoaHong,HoaHong],   Nếu có nhiều hơn 1 thì sẽ lấy ngẫu nhiên, hiểu là cùng là hao đỏ nhưng hình dáng khác nhau tí
+    "Lẳng hoa hướng dương": HoaHong,
+    "Bó hoa khô mini": HoaMauDon,
+    "Bó hoa hồng mix trắng": HoaHongHong,
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      await getChuDesbyName("Nguyên vật liệu thiết kế hoa");
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (chuDesWithName?.sanPhams?.length) {
+      const groupedData = chuDesWithName.sanPhams.reduce((acc, product) => {
+        const groupKey = product.ten
+          .split(" ")
+          .slice(0, 2)
+          .join(" ")
+          .toLowerCase(); // Lấy 2 từ đầu tiên
+        if (!acc[groupKey]) {
+          acc[groupKey] = [];
+        }
+        acc[groupKey].push(product.ten);
+        return acc;
+      }, {});
+
+      const formattedGroups = Object.entries(groupedData).reduce(
+        (acc, [key, values]) => {
+          const fullGroupName = values[0]
+            .split(" ")
+            .slice(0, 2)
+            .join(" ")
+            .trim();
+          acc[fullGroupName] = values;
+          return acc;
+        },
+        {}
+      );
+      setAddButtonList(formattedGroups);
+    }
+  }, [chuDesWithName]);
 
   return (
     <AppContext.Provider
@@ -39,6 +75,8 @@ const AppProvider = ({ children }) => {
         setImages,
         currentIngred,
         setCurrentIngred,
+        finalCost,
+        setFinalCost,
       }}
     >
       {children}
@@ -47,64 +85,3 @@ const AppProvider = ({ children }) => {
 };
 
 export default AppProvider;
-
-
-// import { useDesign } from "@/hooks/useDesign";
-// import React, { createContext, Suspense, useState } from "react";
-
-// export const AppContext = createContext(null);
-
-// // Custom lazy function to handle dynamic imports
-// export const lazy = (componentImportFn) =>
-//   React.lazy(async () => {
-//     let obj = await componentImportFn();
-//     return typeof obj.default === "function" ? obj : { default: obj.default };
-//   });
-
-// const AppProvider = ({ children }) => {
-//   const { dataPanel, dataImages } = useDesign();
-
-//   const [ingreds, setIngreds] = useState([]);
-//   const [currentIngred, setCurrentIngred] = useState(null);
-
-//   // Initialize addButtonList state based on dataPanel and dataImages
-//   const [addButtonList, setAddButtonList] = useState(() =>
-//     dataPanel.reduce((acc, panel) => {
-//       acc[panel] = dataImages
-//         .filter((image) => image.panel === panel)
-//         .map((image) => image.title);
-//       return acc;
-//     }, {})
-//   );
-
-//   // Initialize images state with dynamic imports of SVGs using custom lazy
-//   const [images, setImages] = useState(() =>
-//     dataImages.reduce((acc, image) => {
-//       acc[image.title] = image.src.map((src) =>
-//         lazy(() => import(`${src}`).catch(() => ({ default: () => null })))
-//       );
-//       return acc;
-//     }, {})
-//   );
-
-//   return (
-//     <AppContext.Provider
-//       value={{
-//         ingreds,
-//         setIngreds,
-//         addButtonList,
-//         setAddButtonList,
-//         images,
-//         setImages,
-//         currentIngred,
-//         setCurrentIngred,
-//       }}
-//     >
-//       <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
-//     </AppContext.Provider>
-//   );
-// };
-
-// export default AppProvider;
-
-// https://github.com/fuse-box/fuse-box/issues/1646

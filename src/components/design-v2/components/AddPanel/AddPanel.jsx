@@ -1,9 +1,10 @@
-import { useContext, useState } from 'react';
-import { Collapse, Input } from 'antd';
-import './AddPanel.sass';
-import { AppContext } from '../../AppContext';
-import { AddIngredient } from './AddIngredient/AddIngredient';
-import { Typography } from 'antd';
+import { useContext, useState } from "react";
+import { Collapse, Input } from "antd";
+import "./AddPanel.sass";
+import { AppContext } from "../../AppContext";
+import { AddIngredient } from "./AddIngredient/AddIngredient";
+import { Typography } from "antd";
+import { TotalPrice } from "./TotalPrice";
 
 const { Title } = Typography;
 const { Panel } = Collapse;
@@ -11,8 +12,8 @@ const { Search } = Input;
 
 export const AddPanel = () => {
   const { addButtonList } = useContext(AppContext);
-  const [activePanel, setActivePanel] = useState(['Hoa hồng']); // Active panel mặc định
-  const [searchTerm, setSearchTerm] = useState(''); // Lưu trữ từ khóa tìm kiếm
+  const [activePanel, setActivePanel] = useState(""); // Active panel mặc định
+  const [searchTerm, setSearchTerm] = useState(""); // Lưu trữ từ khóa tìm kiếm
 
   const onCollapseChange = (keys) => {
     setActivePanel(keys); // Cập nhật trạng thái collapse đang mở
@@ -35,10 +36,10 @@ export const AddPanel = () => {
 
   return (
     <div className="ingred_adder hidden-element">
-      <Title level={4}>Danh sách các thành phần thiết kế</Title>
+      <Title level={5}>Danh sách các thành phần thiết kế</Title>
       {/* Ô tìm kiếm */}
       <Search
-        size='large'
+        size="large"
         placeholder="Nhập tên thành phần"
         allowClear
         onSearch={onSearch}
@@ -54,7 +55,7 @@ export const AddPanel = () => {
           <Panel
             key={key}
             header={
-              <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div style={{ display: "flex", alignItems: "center" }}>
                 <span style={{ fontSize: 14, fontWeight: 500 }}>{key}</span>
               </div>
             }
@@ -67,6 +68,7 @@ export const AddPanel = () => {
           </Panel>
         ))}
       </Collapse>
+      <TotalPrice />
     </div>
   );
 };
