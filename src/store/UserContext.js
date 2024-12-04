@@ -7,8 +7,9 @@ const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const storedUserInfo = JSON.parse(localStorage.getItem("user"));
-
-    setUserInfo(storedUserInfo);
+    if (storedUserInfo) {
+      setUserInfo(storedUserInfo);
+    }
   }, []);
 
   return (

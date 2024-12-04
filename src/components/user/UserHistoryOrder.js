@@ -27,16 +27,6 @@ function UserHistoryOder() {
       ),
     },
     {
-      title: "Địa Chỉ",
-      dataIndex: "customer",
-      key: "customer-address",
-      render: (customer) => (
-        <Tooltip title={customer ? customer.address : "N/A"}>
-          <span>{customer ? customer.address : "N/A"}</span>
-        </Tooltip>
-      ),
-    },
-    {
       title: "Sản Phẩm",
       dataIndex: "items",
       key: "items",

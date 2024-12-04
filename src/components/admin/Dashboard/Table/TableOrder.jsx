@@ -1,59 +1,32 @@
-import "@/styles/OrderManage.scss";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import "./Table.scss";
+import { useState, useEffect } from "react";
 import { Table, Button, Typography, Tag } from "antd";
-import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
 import { useCombineDataContext } from "@/store/CombinedDataContext";
+import { format } from "date-fns";
 
 const { Title } = Typography;
 
-export default function OrderManage() {
-  const {orders, products} = useCombineDataContext();
+export default function TableOrder() {
+  const { orders, products } = useCombineDataContext();
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const navigate = useNavigate();
-  const findProductById = (productId) => {
-    return products.find((product) => product._id === productId)
-  }
-  // Sample hardcoded order data
-  const sampleOrders = [
-    {
-      _id: "ORD001",
-      createdAt: "2024-11-10T10:00:00Z",
-      user: { fullname: "Nguyen Van A" },
-      status: 1,
-      total: 500000,
-    },
-    {
-      _id: "ORD002",
-      createdAt: "2024-11-11T11:30:00Z",
-      user: { fullname: "Tran Thi B" },
-      status: 2,
-      total: 750000,
-    },
-    {
-      _id: "ORD003",
-      createdAt: "2024-11-12T09:15:00Z",
-      user: { fullname: "Le Van C" },
-      status: 3,
-      total: 320000,
-    },
-    {
-      _id: "ORD004",
-      createdAt: "2024-11-13T08:45:00Z",
-      user: { fullname: "Pham Thi D" },
-      status: 4,
-      total: 150000,
-    },
-  ];
 
-  // const [orders, setOrders] = useState(sampleOrders);
-  const [filter, setFilter] = useState("");
+  // Lấy sản phẩm theo ID
+  const findProductById = (productId) => {
+    return products.find((product) => product._id === productId);
+  };
+
+  // Lọc lấy 5 đơn hàng gần nhất
+  const recentOrders = orders.slice(-5);
 
   const handleChange = (pagination, filters, sorter) => {
     setFilteredInfo(filters);
     setSortedInfo(sorter);
   };
+
+  // Định nghĩa các cột của bảng
   const columns = [
     {
       title: "Tên Khách Hàng",
@@ -62,15 +35,6 @@ export default function OrderManage() {
       sorter: (a, b) => a.customer.name.localeCompare(b.customer.name),
       sortOrder:
         sortedInfo.columnKey === "customerName" ? sortedInfo.order : null,
-    },
-    {
-      title: "Địa Chỉ",
-      dataIndex: ["customer", "address"],
-      key: "customerAddress",
-      sorter: (a, b) =>
-        a.customer.address.localeCompare(b.customer.address),
-      sortOrder:
-        sortedInfo.columnKey === "customerAddress" ? sortedInfo.order : null,
     },
     {
       title: "Tên Sản Phẩm",
@@ -96,31 +60,53 @@ export default function OrderManage() {
         return totalQuantity;
       },
     },
-
     {
       title: "Trạng Thái",
       dataIndex: "status",
       key: "status",
-      filters: [
-        { text: "Đã thanh toán", value: "Đã thanh toán" },
-        { text: "Đang giao hàng", value: "Đang giao hàng" },
-        { text: "Chưa thanh toán", value: "Chưa thanh toán" },
-        { text: "Đang chuẩn bị", value: "Đang chuẩn bị" },
-        { text: "Đã nhận hàng", value: "Đã nhận hàng" },
-        { text: "Đã hủy đơn hàng", value: "Đã hủy đơn hàng" },
-      ],      
-      filteredValue: filteredInfo.status || null,
-      onFilter: (value, record) => record.status === value,
+      render: (status) => {
+        let color;
+        let text;
+        switch (status) {
+          case "Đã thanh toán":
+            color = "green";
+            text = "Đã thanh toán";
+            break;
+          case "Đang giao hàng":
+            color = "blue";
+            text = "Đang giao hàng";
+            break;
+          case "Chưa thanh toán":
+            color = "orange";
+            text = "Chưa thanh toán";
+            break;
+          case "Đang chuẩn bị" :
+            color = "pink"
+            text = "Đang chuẩn bị";
+            break;
+          case "Đã nhận hàng":
+            color = "yellow"
+            text = "Đã nhận hàng";
+            break;
+          case "Đã hủy đơn hàng":
+            color = "red";
+            text = "Đã hủy đơn hàng";
+            break;
+          default:
+            color = "gray";
+            text = "Chưa xác định";
+        }
+        return <Tag color={color}>{text}</Tag>;
+      },
     },
     {
       title: "Ngày Tạo",
       dataIndex: "createdAt",
       key: "createdAt",
-      render: (createdAt) => new Date(createdAt).toLocaleString(),
+      render: (createdAt) => format(new Date(createdAt), "dd/MM/yyyy HH:mm"),
       sorter: (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
       sortOrder: sortedInfo.columnKey === "createdAt" ? sortedInfo.order : null,
     },
-
     {
       title: "Chi Tiết",
       key: "action",
@@ -142,18 +128,14 @@ export default function OrderManage() {
   ];
 
   return (
-    <div className="OrderManage">
-      <div className="order-manage-title">
-        <Title level={2}>Quản lý đơn hàng</Title>
-      </div>
-
+    <div className="Table">
       <Table
         columns={columns}
-        dataSource={orders}
+        dataSource={recentOrders}
         rowKey="_id"
-        pagination={{ pageSize: 8 }}
         onChange={handleChange}
         className="order-table"
+        pagination={false}  // Bỏ pagination
       />
     </div>
   );

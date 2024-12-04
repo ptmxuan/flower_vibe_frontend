@@ -80,6 +80,22 @@
         }
       }
     }
+    .order-status-buttons {
+      margin: 10px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      .ant-btn {
+        color: #b7bf44;
+        border-color: #b7bf44;
+        &:hover {
+          color: white;
+          background-color: #b7bf44;
+          border-color: #b7bf44;
+        }
+      }
+    }
     .back-to-home {
       margin-bottom: 20px;
       .ant-btn {

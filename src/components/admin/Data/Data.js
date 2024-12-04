@@ -10,7 +10,6 @@ import {
 
 // Analytics Cards imports
 import { UilUsdSquare, UilMoneyWithdrawal } from "@iconscout/react-unicons";
-// import { keyboard } from "@testing-library/user-event/dist/keyboard";
 import { UilHouseUser } from "@iconscout/react-unicons";
 import { UilFlower } from "@iconscout/react-unicons";
 import { UilFileAlt } from "@iconscout/react-unicons";
@@ -52,7 +51,7 @@ export const SidebarData = [
   },
   {
     icon: UilChart,
-    heading: "Thống kê",
+    heading: "Quản lý người dùng",
   },
 ];
 

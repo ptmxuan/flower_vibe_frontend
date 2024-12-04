@@ -23,7 +23,7 @@
           margin-top: 110px;
           color: #f9f8ee;
           text-align: left;
-         
+
           .title-login-left {
             width: 30vw;
             font-size: 20px;
@@ -37,6 +37,7 @@
           a {
             color: #186321;
             font-weight: 600;
+           
           }
 
           .title-login-right {
@@ -44,6 +45,7 @@
             font-family: "Signika", sans-serif;
             font-size: 24px;
             color: #178223;
+            padding-left: 110px;
           }
           .form-content {
             display: flex;
@@ -89,6 +91,7 @@
                 & > a {
                   font-weight: 650;
                   font-size: 17px;
+                  padding-left:120px;
                 }
               }
             }

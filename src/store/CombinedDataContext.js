@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { useProduct, useCart, useOrder } from "@/hooks";
+import { useProduct, useCart, useOrder, useNhapHang } from "@/hooks";
 import { useUserContext } from "@/store/UserContext";
 
 // Tạo context
@@ -7,10 +7,11 @@ const CombineDataContext = createContext();
 
 // Tạo một provider component
 export const CombineDataProvider = ({ children }) => {
-  const [quantities, setQuantities] = useState({});  // Chuyển từ mảng thành đối tượng
+  const [quantities, setQuantities] = useState({});
   const { products, getProducts } = useProduct();
-  const { orders, getAllOrders } = useOrder();
-  const { cartItems, getCart } = useCart(); //lấy 2 hàm là State và hàm nào get tất cả
+  const { orders, getAllOrders, getAllOrdersWithoutUserId } = useOrder();
+  const { nhapHangs, getNhapHangs } = useNhapHang();
+  const { cartItems, getCart } = useCart();
   const userInfo = useUserContext();
   const userId = userInfo?._id;
 
@@ -28,9 +29,14 @@ export const CombineDataProvider = ({ children }) => {
         if (!cartItems || cartItems.length === 0) {
           await getCart(userId); //cái nào có prop thì truyền vô
         }
+        if (!nhapHangs || nhapHangs.length === 0) {
+          await getNhapHangs();
+        }
 
         if (!orders || orders.length === 0) {
-          await getAllOrders(userId);
+          if (userInfo.role === "admin") {
+            await getAllOrdersWithoutUserId();
+          } else await getAllOrders(userId);
         }
 
         // Gọi API lấy tất cả đơn hàng nếu chưa tải
@@ -46,6 +52,9 @@ export const CombineDataProvider = ({ children }) => {
   const value = {
     products,
     orders,
+    nhapHangs,
+    getNhapHangs,
+    getAllOrdersWithoutUserId,
     getAllOrders,
     getProducts,
     cartItems,
