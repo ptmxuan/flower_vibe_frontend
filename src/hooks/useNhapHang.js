@@ -4,19 +4,15 @@ import { useState, useEffect } from "react";
 
 export const useNhapHang = () => {
   const { loading, data, error, get, post, put, del } = useApi(
-    API_END_POINT.nhapHang // Replace with the appropriate endpoint for Nhập Hàng
+    API_END_POINT.nhapHangs
   );
   const [nhapHangs, setNhapHangs] = useState([]);
 
   useEffect(() => {
     if (data) {
-      setNhapHangs(data.nhapHangs);
+      setNhapHangs(data);
     }
   }, [data]);
-
-  useEffect(() => {
-    getNhapHangs();
-  }, []);
 
   // Function to get all Nhập Hàng
   const getNhapHangs = async () => {
@@ -39,6 +35,7 @@ export const useNhapHang = () => {
 
   // Function to create a new Nhập Hàng
   const createNhapHang = async (nhapHangData) => {
+    console.log("nhapHangData", nhapHangData);
     try {
       return await post(nhapHangData);
     } catch (err) {
@@ -49,7 +46,7 @@ export const useNhapHang = () => {
   // Function to update a Nhập Hàng by ID
   const updateNhapHangById = async (id, nhapHangData) => {
     try {
-      return await put(nhapHangData, `${API_END_POINT.nhapHang}/${id}`);
+      return await put(nhapHangData, `${API_END_POINT.nhapHangs}/${id}`);
     } catch (err) {
       console.error(`Error updating Nhập Hàng with ID ${id}:`, err);
     }
@@ -58,7 +55,7 @@ export const useNhapHang = () => {
   // Function to delete a Nhập Hàng by ID
   const deleteNhapHangById = async (id) => {
     try {
-      return await del({}, `${API_END_POINT.nhapHang}/${id}`);
+      return await del({}, `${API_END_POINT.nhapHangs}/${id}`);
     } catch (err) {
       console.error(`Error deleting Nhập Hàng with ID ${id}:`, err);
     }

@@ -24,6 +24,13 @@ export const useOrder = () => {
       console.error("Error fetching orders:", err);
     }
   };
+  const getAllOrdersWithoutUserId = async () => {
+    try {
+      await get();
+    } catch (err) {
+      console.error("Error fetching orders:", err);
+    }
+  };
 
   // Lấy chi tiết đơn hàng theo ID
   const getOrderById = async (_id) => {
@@ -45,6 +52,7 @@ export const useOrder = () => {
       .catch((err) => console.error("Error creating order:", err));
   };
   const updateOrderStatus = async (orderId, status) => {
+    console.log("status", status, orderId);
     return await put({ status }, `${END_POINT}/update/${orderId}`)
       .then((res) => {
         setOrders((prevOrders) =>
@@ -87,5 +95,6 @@ export const useOrder = () => {
     updateOrder,
     deleteOrder,
     updateOrderStatus,
+    getAllOrdersWithoutUserId,
   };
 };

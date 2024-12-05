@@ -16,6 +16,8 @@ export const SendButton = ({ nameDesign }) => {
 
   const userInfo = useUserContext();
 
+  console.log('userInfo',userInfo)
+
   const { addToCart } = useCart();
 
   const { getCart } = useCombineDataContext();

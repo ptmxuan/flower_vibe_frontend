@@ -8,6 +8,7 @@ import {
   message,
   DatePicker,
   Table,
+  InputNumber
 } from "antd";
 import { useProduct } from "@/hooks/useProduct";
 import { useNhaCungCap } from "@/hooks/useNhaCungCap";
@@ -19,7 +20,7 @@ function CreateNhapHang({ handleRefresh }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = Form.useForm();
   const [productsData, setProductsData] = useState([]);
-  const { products, getProducts } = useProduct();
+  const { products, getProducts,updateQuantity } = useProduct();
   const { nhaCungCaps, getNhaCungCaps } = useNhaCungCap();
   const { createNhapHang } = useNhapHang();
 
@@ -31,7 +32,7 @@ function CreateNhapHang({ handleRefresh }) {
   const handleAddRow = () => {
     setProductsData([
       ...productsData,
-      { key: Date.now(), productId: null, quantity: 0, price: 0 },
+      { key: Date.now(), productId: null, quantity: 0, importPrice: 0 },
     ]);
   };
 
@@ -44,14 +45,19 @@ function CreateNhapHang({ handleRefresh }) {
       const formValues = await form.validateFields();
       const payload = {
         ...formValues,
-        products: productsData.map(({ productId, quantity, price }) => ({
+        products: productsData.map(({ productId, quantity, importPrice }) => ({
           productId,
           quantity,
-          price,
+          importPrice,
         })),
       };
-
+console.log("payload",payload)
       await createNhapHang(payload);
+      for (const { productId, quantity } of productsData) {
+        if (quantity > 0) {  
+          await updateQuantity(productId, quantity);
+        }
+      }
       message.success("Tạo hóa đơn nhập hàng thành công!");
       handleRefresh();
       setIsModalOpen(false);
@@ -92,6 +98,7 @@ function CreateNhapHang({ handleRefresh }) {
       render: (_, record, index) => (
         <Input
           type="number"
+          min={1}
           value={record.quantity}
           onChange={(e) => {
             const updated = [...productsData];
@@ -104,14 +111,15 @@ function CreateNhapHang({ handleRefresh }) {
     },
     {
       title: "Giá nhập",
-      dataIndex: "price",
+      dataIndex: "importPrice",
       render: (_, record, index) => (
         <Input
+        min={1}
           type="number"
-          value={record.price}
+          value={record.importPrice}
           onChange={(e) => {
             const updated = [...productsData];
-            updated[index].price = Number(e.target.value);
+            updated[index].importPrice = Number(e.target.value);
             setProductsData(updated);
           }}
           placeholder="Nhập giá nhập"
@@ -136,7 +144,7 @@ function CreateNhapHang({ handleRefresh }) {
 
       <Modal
         title="Tạo hóa đơn nhập hàng"
-        visible={isModalOpen}
+        open={isModalOpen}
         onCancel={() => setIsModalOpen(false)}
         onOk={handleSubmit}
         width="70%"
@@ -145,7 +153,7 @@ function CreateNhapHang({ handleRefresh }) {
       >
         <Form form={form} layout="vertical">
           <Form.Item
-            name="nhaCungCap"
+            name="supplierName"
             label="Nhà cung cấp"
             rules={[{ required: true, message: "Vui lòng chọn nhà cung cấp" }]}
           >
@@ -158,14 +166,14 @@ function CreateNhapHang({ handleRefresh }) {
             </Select>
           </Form.Item>
           <Form.Item
-            name="ngayNhap"
+            name="createdAt"
             label="Ngày nhập"
             rules={[{ required: true, message: "Vui lòng chọn ngày nhập" }]}
           >
             <DatePicker style={{ width: "100%" }} />
           </Form.Item>
           <Form.Item
-            name="noiDung"
+            name="description"
             label="Nội dung nhập hàng"
             rules={[{ required: true, message: "Vui lòng nhập nội dung" }]}
           >

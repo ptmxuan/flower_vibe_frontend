@@ -65,7 +65,13 @@ export const useProduct = () => {
       console.error(`Error deleting product with ID ${id}:`, err);
     }
   };
-
+  const updateQuantity = async (id, quantity) => {
+    try {
+      return await put({ quantity }, `${API_END_POINT.product}/update/${id}`);
+    } catch (err) {
+      console.error(`Error updating quantity for product with ID ${id}:`, err);
+    }
+  };
   return {
     loading,
     products,
@@ -75,5 +81,6 @@ export const useProduct = () => {
     createProduct,
     updateProductById,
     deleteProductById,
+    updateQuantity,
   };
 };

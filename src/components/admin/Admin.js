@@ -8,7 +8,7 @@ import "@/styles/AdminPage.scss";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AddProduct from "../manage/products/AddProduct";
-import StatisticProduct from "../manage/statistic/StatisticProduct";
+import UserManagement from "@/components/manage/nguoidung/UserManagement";
 import ManageChuDePage from "@/pages/ManageChuDe";
 import ManageNhaCungCapPage from "@/pages/ManageNhaCungCap";
 import ManageNhapHangPage from "@/pages/ManageNhaphang";
@@ -49,7 +49,7 @@ function Admin() {
       content = <ManageNhapHangPage />;
       break;
     case 6:
-      content = <StatisticProduct />;
+      content = <UserManagement />;
       break;
     case 7:
       content = <AddProduct />;
