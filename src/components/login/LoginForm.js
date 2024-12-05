@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import { Button, Checkbox, Form, Input, Flex, notification } from "antd";
-import { EyeInvisibleOutlined, EyeTwoTone, LockOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  EyeInvisibleOutlined,
+  EyeTwoTone,
+  LockOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import { useLogin } from "@/hooks"; // Điều chỉnh đường dẫn nếu cần
+import { useLogin } from "@/hooks";
 
 function LoginForm() {
   const navigate = useNavigate();
   const { login, loading } = useLogin();
-
-  const [error, setError] = useState()
+  const [error, setError] = useState();
 
   const onFinish = async (values) => {
     try {
@@ -16,16 +20,20 @@ function LoginForm() {
       console.log("values.password", values.password);
       let status = await login(values.username, values.password);
 
-      if (status === 'success') {
-        navigate("/");
+      if (status === "success") {
         const storedUser = JSON.parse(localStorage.getItem("user"));
+        if (storedUser?.role === "admin") {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
         notification.success({
           message: "Đăng nhập thành công",
           description: `Chúc bạn ${storedUser.name} có trải nghiệm tại web`,
           placement: "bottomRight",
         });
       } else {
-        setError(status)
+        setError(status);
       }
     } catch (err) {
       console.error("Login failed:", err.message);
@@ -73,11 +81,13 @@ function LoginForm() {
               },
             ]}
           >
-             <Input.Password
+            <Input.Password
               prefix={<LockOutlined />}
               type="password"
               placeholder="Password"
-              iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+              iconRender={(visible) =>
+                visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+              }
             />
           </Form.Item>
           <Form.Item>

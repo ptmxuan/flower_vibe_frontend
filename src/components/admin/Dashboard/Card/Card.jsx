@@ -10,6 +10,7 @@ import Chart from "react-apexcharts";
 const Card = (props) => {
   const [expanded, setExpanded] = useState(false);
 
+  
   return (
     <AnimatePresence>
       {expanded ? (
@@ -24,6 +25,7 @@ const Card = (props) => {
 // Compact Card
 function CompactCard({ param, setExpanded }) {
   const Png = param.png;
+ 
   return (
     <motion.div
       className="CompactCard"
@@ -53,18 +55,22 @@ function CompactCard({ param, setExpanded }) {
 // Expanded Card
 function ExpandedCard({ param, setExpanded }) {
   const [categories, setCategories] = useState([]);
-
   useEffect(() => {
-    // Generate categories for the current month
-    const currentDate = new Date();
-    const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
-    const newCategories = Array.from({ length: daysInMonth }, (_, index) => {
-      const day = index + 1;
-      return `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}T00:00:00.000Z`;
-    });
-    setCategories(newCategories);
-  }, []);
-
+    // Lấy danh sách các tháng từ series (x)
+    const months = param.series.map((item) => item.x);
+    setCategories(months);
+  }, [param.series]);
+  // useEffect(() => {
+  //   // Generate categories for the current month
+  //   const currentDate = new Date();
+  //   const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
+  //   const newCategories = Array.from({ length: daysInMonth }, (_, index) => {
+  //     const day = index + 1;
+  //     return `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}T00:00:00.000Z`;
+  //   });
+  //   setCategories(newCategories);
+  // }, []);
+  const dataStatistic = param.series.map((item) => item.y)
   const data = {
     options: {
       chart: {
@@ -102,12 +108,22 @@ function ExpandedCard({ param, setExpanded }) {
         show: true,
       },
       xaxis: {
-        type: "datetime",
+        type: "category",
         categories: categories,
       },
+      // yaxis: {
+      //   min: 0,
+      // }
     },
+    series: [
+      {
+        name: param.title, // Tên biểu đồ
+        data: dataStatistic, // Dữ liệu từ dataStatistic
+      },
+    ],
   };
 
+console.log("dataa", dataStatistic, param.series.map((item) => item.y))
   return (
     <motion.div
       className="ExpandedCard"
@@ -122,7 +138,7 @@ function ExpandedCard({ param, setExpanded }) {
       </div>
       <span>{param.title}</span>
       <div className="chartContainer">
-        <Chart options={data.options} series={param.series} type="area" />
+        <Chart options={data.options} series={data.series} type="area" />
       </div>
       <span>Theo tháng hiện tại</span>
     </motion.div>

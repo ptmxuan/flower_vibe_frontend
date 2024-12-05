@@ -87,7 +87,10 @@ export const useApi = (endpointUrl) => {
     setLoading(true);
     return axiosGetData_
       .delete(customEndpoint ? customEndpoint : endpointUrl, { data: payload })
-      .then((response) => setData(response.data))
+      .then((response) => {
+        setData(response.data);
+        return response.data;
+      })
       .catch((error) => setError(error))
       .finally(() => setLoading(false));
   };

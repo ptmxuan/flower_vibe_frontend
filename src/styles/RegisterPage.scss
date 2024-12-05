@@ -20,6 +20,9 @@
           margin-right: 40px;
           margin-top: 150px;
           color: #f9f8ee;
+          .title-register-left {
+            width: 46vw;
+          }
         }
         .register-form {
           background-color: rgb(162 200 110);
@@ -35,6 +38,7 @@
             font-family: "Signika", sans-serif;
             font-size: 24px;
             color: #178223;
+            padding-left: 110px;
           }
           .form-content-register {
             // background-color: #f9f8ee;
@@ -47,14 +51,13 @@
               .ant-form-item {
                 .ant-col.ant-form-item-label.ant-col-xs-24.ant-col-sm-8 {
                   margin-right: 12px;
-                
                 }
                 .ant-form-item-control-input {
                   .ant-btn {
                     background-color: #178223;
                     width: 50%;
                     margin: 15px 0;
-
+                    margin-left: 100px;
                     &:hover {
                       background-color: white;
                       color: #178223;

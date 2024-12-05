@@ -31,9 +31,9 @@ function PaymentSuccessPage() {
       console.log("Order ID:", id);
 
       if (vnpResponseCode === "00") {
-        handleUpdateStatus(id, "Đã Thanh toán");
+        handleUpdateStatus(id, "Đã thanh toán");
       } else {
-        handleUpdateStatus(id, "Thanh toán thất bại");
+        handleUpdateStatus(id, "Chưa thanh toán");
       }
     }
   }, [orders]);

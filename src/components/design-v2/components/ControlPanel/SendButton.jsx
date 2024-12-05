@@ -12,9 +12,11 @@ import { useCart } from "@/hooks/useCart";
 import { useCombineDataContext } from "@/store/CombinedDataContext";
 
 export const SendButton = ({ nameDesign }) => {
-  const { setCurrentIngred, ingreds } = useContext(AppContext);
+  const { setCurrentIngred, ingreds, finalCost } = useContext(AppContext);
 
   const userInfo = useUserContext();
+
+  console.log('userInfo',userInfo)
 
   const { addToCart } = useCart();
 
@@ -159,10 +161,25 @@ export const SendButton = ({ nameDesign }) => {
       });
     }
 
-    const materials = [
-      { id: "672b792681aa3dd73bfb7d3d", name: "Hoa hồng đỏ", quantity: 5 },
-      { id: "672b792681aa3dd73bfb7d3e", name: "Hoa cẩm tú", quantity: 3 },
-    ];
+    const countMaterials = (ingredients) => {
+      const materialCount = {};
+
+      ingredients.forEach((ingredient) => {
+        const { type } = ingredient;
+        if (materialCount[type]) {
+          materialCount[type] += 1;
+        } else {
+          materialCount[type] = 1;
+        }
+      });
+
+      return Object.keys(materialCount).map((type) => ({
+        name: type,
+        quantity: materialCount[type],
+      }));
+    };
+
+    const materials = countMaterials(ingreds);
 
     const resizedImageData = await resizeImage(imageData);
     await createDesign(
@@ -170,7 +187,7 @@ export const SendButton = ({ nameDesign }) => {
       nameDesign,
       resizedImageData,
       materials,
-      1200000
+      finalCost
     );
   };
 

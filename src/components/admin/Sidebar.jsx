@@ -34,7 +34,7 @@ const user = JSON.parse(localStorage.getItem("user")) ?? null;
 
 const handleLogout = () => {
   localStorage.removeItem("user");
-  window.location.href = "/loginpage";
+  window.location.href = "/dang-nhap";
   alert("Đăng xuất thành công");
 }
 const handleDropDown = (i) => {

@@ -6,4 +6,5 @@ export const API_END_POINT = {
   design: "/api/designs",
   chuDe: "/api/chu-de",
   nhaCungCap: "/api/nha-cung-cap",
+  nhapHangs: "/api/importOrder",
 };
